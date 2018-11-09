@@ -1,0 +1,190 @@
+﻿<UserControl
+    x:Class="scwin.UserRoles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid Margin="2" HorizontalAlignment="Stretch">
+        <Grid.Resources>
+
+            <!-- When using x:Bind, you need to set x:DataType -->
+            <DataTemplate x:Key="RolesListViewTemplate" x:DataType="local:UserRole">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".6*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                    />
+                    <HyperlinkButton x:Name="hlinkRoleName" 
+                                     Content="{x:Bind Name, Mode=OneWay}" 
+                                     Grid.Column="1" 
+                                     VerticalAlignment="Center" 
+                                     Tag="{x:Bind}"
+                                     Click="hlinkRoleName_Click"/>
+                    <TextBlock 
+                        Grid.Column="2"
+                        Text="{x:Bind FunctionalRightsAsString, Mode=OneWay}" 
+                        Visibility="Visible"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"
+                    />
+                </Grid>
+            </DataTemplate>
+        </Grid.Resources>
+        <SplitView x:Name="splitPane" DisplayMode="Overlay" PanePlacement="Right" 
+                   OpenPaneLength="500"
+                   IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
+                   PaneClosing="splitPane_PaneClosing"
+                   >
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="1" 
+                            Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"
+                            HorizontalAlignment="Stretch">
+                    <CommandBar OverflowButtonVisibility="Auto" 
+                                VerticalContentAlignment="Center"
+                                ClosedDisplayMode="Compact"
+                                Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"
+                                >
+                        <CommandBar.Content>
+                            <TextBlock Margin="10,0,0,0" Text="Manage Roles" Style="{ThemeResource TextBlockColumnHeader}" 
+                                       />
+                        </CommandBar.Content>
+                        <AppBarButton Command="{x:Bind ViewModel.AddCommand}" 
+                                      Icon="Add" Label="Add Role"
+                                      />
+                        <AppBarButton Command="{x:Bind ViewModel.RefreshCommand}" 
+                                      Icon="Refresh" Label="Refresh"
+                                      />
+                        <CommandBar.SecondaryCommands>
+                            <AppBarButton Command="{x:Bind ViewModel.ImportCommand}" 
+                                      Icon="ImportAll" Label="Import Roles"
+                                      />
+                            <AppBarButton Command="{x:Bind ViewModel.DeleteCommand}" 
+                                      IsEnabled="False" Icon="Delete" Label="Delete Role(s)"
+                                      />
+                        </CommandBar.SecondaryCommands>
+                    </CommandBar>
+                    </Border>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition Width=".6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="3" 
+                    BorderThickness="0,1,0,1" 
+                    BorderBrush="{ThemeResource StreetcatDefaultBlue}"/>
+                        <CheckBox HorizontalAlignment="Center">
+                            <CheckBox.RenderTransform>
+                                <TranslateTransform X="12"/>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+                        <TextBlock Grid.Column="1" Style="{StaticResource TextBlockColumnHeader}" 
+                       HorizontalAlignment="Left"
+                       Text="Role Name"/>
+                        <TextBlock Grid.Column="2" Style="{StaticResource TextBlockColumnHeader}" 
+                       HorizontalAlignment="Left"
+                       Text="Functional Rights"/>
+                    </Grid>
+
+                    <ListView 
+                        x:Name="listOfRoles"
+                            Grid.Row="2" 
+                            HorizontalAlignment="Stretch" 
+                            Grid.ColumnSpan="2" 
+                            Grid.Column="0"
+                            IsItemClickEnabled="True"
+                            ItemsSource="{x:Bind ViewModel.FilteredList, Mode=OneWay}"
+                            ItemTemplate="{StaticResource RolesListViewTemplate}"
+                            SelectedItem="{x:Bind ViewModel.SelectedRole, Mode=TwoWay}"
+                        LostFocus="listOfRoles_LostFocus"
+                        SelectionChanged="listOfRoles_SelectionChanged"
+                        >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </SplitView.Content>
+            <SplitView.Pane>
+                <Grid x:Name="pane">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0" 
+                            Background="{ThemeResource SystemControlAccentDark2AcrylicElementAccentDark2MediumHighBrush}"
+                        >
+                        <Canvas Height="50">
+                            <Ellipse Width="50" Height="50" Fill="White" Opacity="1" Stroke="{ThemeResource SystemControlAltMediumLowAcrylicElementMediumBrush}" StrokeThickness="1">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform Y="10" X="10"/>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <Ellipse Width="50" Height="50">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform Y="10" X="10"/>
+                                </Ellipse.RenderTransform>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Assets/Admin@2x.png" Opacity="1" Stretch="UniformToFill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <TextBlock 
+                                Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"
+                                Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                Text="{x:Bind ViewModel.SelectedRole.Name, Mode=OneWay}" 
+                                Canvas.Left="75"
+                                Canvas.Top="15"
+                                />
+
+                            <AppBarButton 
+                                x:Name="btnRolePaneClose"
+                                Canvas.Left="440" Canvas.Top="3" 
+                                Width="40"
+                                Background="Transparent" Icon="Cancel" 
+                                Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                ToolTipService.ToolTip="Close"
+                                Click="btnRolePaneClose_Click"
+                                />
+
+                        </Canvas>
+                    </Border>
+                    <local:UserRoleControl x:Name="userRoleControl" 
+                           Padding="10" 
+                           Grid.Row="1" 
+                            ViewModel="{x:Bind ViewModel}"
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Stretch"
+                                           />
+                </Grid>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</UserControl>

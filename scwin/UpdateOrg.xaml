@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="scwin.UpdateOrg"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="1200"
+    d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+        <!--Title-->
+        <Border Grid.Row="0" Background="#FF7A7A7A"/>
+        <TextBlock Grid.Row="0"  Foreground="White" VerticalAlignment="Center" Margin="20">Organization Information</TextBlock>
+        <Button Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Background="Transparent"  >
+            <SymbolIcon Symbol="Refresh"/>
+        </Button>
+
+        <!--Rest of the page-->
+        <Grid Grid.Row="1" Margin="25,20,40,0" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!--Actual page-->
+            <Grid Grid.Row="0" RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="OrgName"  Grid.Row="0" Header="Name" Style="{StaticResource RequiredTextBoxStyle}"/>
+
+                <Grid Grid.Row="1" RowSpacing="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="OrgAddr1" Grid.Row="0" Header="Address" Style="{StaticResource RequiredTextBoxStyle}"/>
+                    <TextBox x:Name="OrgAddr2"  Grid.Row="1" />
+                </Grid>
+
+                <TextBox x:Name="OrgCity"  Grid.Row="2" Header="City" Style="{StaticResource RequiredTextBoxStyle}"/>
+
+                <Grid Grid.Row="3" ColumnSpacing="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="OrgState"  Grid.Column="0" Header="State" Style="{StaticResource RequiredTextBoxStyle}"/>
+                    <TextBox x:Name="OrgZipcode"  Grid.Column="1" Header="Zipcode" Style="{StaticResource RequiredTextBoxStyle}"/>
+                </Grid>
+
+                <TextBox x:Name="OrgCountry"  Grid.Row="4" Header="Country" Style="{StaticResource RequiredTextBoxStyle}"/>
+
+                <TextBox x:Name="OrgPhone"  Grid.Row="5" Header="Phone" Style="{StaticResource RequiredTextBoxStyle}"/>
+
+                <TextBox x:Name="OrgTechPerson"  Grid.Row="6" Header="Technical contact" Style="{StaticResource OptionalTextBoxStyle}"/>
+
+
+
+            </Grid>
+            <!--Action Buttons-->
+            <StackPanel Grid.Row="3" Margin="0,70,20,20" Orientation="Horizontal" VerticalAlignment="Top" Spacing="40">
+                <Button x:Name="EditButton" Background="#FF005A9E" Foreground="White" Height="32" FontWeight="SemiBold" Width="96">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <SymbolIcon Symbol="Save" Width="20" Height="20"/>
+                        <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Save</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="Cancel" Background="White" Foreground="#FF005A9E" BorderBrush="#FF005A9E" Height="32" BorderThickness="1" Width="96">
+                    <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <SymbolIcon Symbol="Cancel" Width="20" Height="20"/>
+                        <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Cancel</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</UserControl>

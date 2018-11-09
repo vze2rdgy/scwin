@@ -1,0 +1,467 @@
+﻿<UserControl
+    x:Class="scwin.UserProfiles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid x:Name="userProfileRootGrid">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VG1">
+                <VisualState x:Name="UnmodifiedUserState">
+                    <!--<VisualState.StateTriggers>
+                        <local:DataStateVisibilityTrigger ObjectState="Unmodified" ObjectStateTrigger="{x:Bind ViewModel.EditedUserProfile.ObjectState, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>-->
+                    <VisualState.Setters>
+                        <Setter Target="spEmailConfirmation.Visibility" Value="Collapsed"/>
+                        <Setter Target="txtEmailAddress.Visibility" Value="Visible"/>
+                        <Setter Target="btnPaneAddUserProfile.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnPaneEditUserProfile.Visibility" Value="Visible"/>
+                        <Setter Target="btnPaneEditUserProfile.IsEnabled" Value="False"/>
+                        <Setter Target="btnInviteNewUser.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnkResetPassword.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="AddingUserState">
+                    <!--<VisualState.StateTriggers>
+                        <local:DataStateVisibilityTrigger ObjectState="Added" ObjectStateTrigger="{x:Bind ViewModel.EditedUserProfile.ObjectState, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>-->
+                    <VisualState.Setters>
+                        <Setter Target="spEmailConfirmation.Visibility" Value="Visible"/>
+                        <Setter Target="txtEmailAddress.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnPaneAddUserProfile.Visibility" Value="Visible"/>
+                        <Setter Target="btnPaneEditUserProfile.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnInviteNewUser.Visibility" Value="Visible"/>
+                        <Setter Target="btnkResetPassword.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="EditingUserState">
+                    <!--<VisualState.StateTriggers>
+                        <local:DataStateVisibilityTrigger ObjectState="Edited" ObjectStateTrigger="{x:Bind ViewModel.EditedUserProfile.ObjectState, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>-->
+                    <VisualState.Setters>
+                        <Setter Target="spEmailConfirmation.Visibility" Value="Collapsed"/>
+                        <Setter Target="txtEmailAddress.Visibility" Value="Visible"/>
+                        <Setter Target="btnPaneAddUserProfile.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnPaneEditUserProfile.Visibility" Value="Visible"/>
+                        <Setter Target="btnInviteNewUser.Visibility" Value="Collapsed"/>
+                        <Setter Target="btnkResetPassword.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup x:Name="VG2">
+                <VisualState x:Name="UserPwdResetCollapsedViewState">
+                    <VisualState.Setters>
+                        <Setter Target="UserPwdResetView.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="UserPwdResetVisibleViewState">
+                    <VisualState.Setters>
+                        <Setter Target="UserPwdResetView.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.Resources>
+            <!-- When using x:Bind, you need to set x:DataType -->
+            <DataTemplate x:Key="UserListViewTemplate" x:DataType="local:UserProfile">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width=".3*"/>
+                        <ColumnDefinition Width=".4*"/>
+                        <ColumnDefinition Width=".3*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox
+                        Grid.Column="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        IsChecked="{x:Bind IsSelected, Mode=TwoWay}"
+                    />
+                    <HyperlinkButton x:Name="hlinkUserName" 
+                                     Content="{x:Bind FullName, Mode=OneWay}" 
+                                     Grid.Column="1" 
+                                     VerticalAlignment="Center" 
+                                     Tag="{x:Bind}"
+                                     Click="hlinkUserName_Click"
+                                     />
+                    <TextBlock 
+                        Grid.Column="2"
+                        Visibility="Visible"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Text="{x:Bind Email, Mode=OneWay}"
+                    />
+                    
+                    <TextBlock 
+                        Grid.Column="3"
+                        Visibility="Visible"
+                        VerticalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Text="{x:Bind MemberRolesAsString, Mode=OneWay}"
+                    />
+                </Grid>
+            </DataTemplate>
+
+        </Grid.Resources>
+        
+        <SplitView x:Name="splitPane" DisplayMode="Overlay" PanePlacement="Right"
+                   OpenPaneLength="600"
+                   IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
+                   PaneClosing="splitPane_PaneClosing">
+            <SplitView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="1" 
+                            Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"
+                            HorizontalAlignment="Stretch">
+                        <CommandBar OverflowButtonVisibility="Auto" 
+                                VerticalContentAlignment="Center"
+                                ClosedDisplayMode="Compact"
+                                Background="{ThemeResource SystemControlAcrylicElementMediumHighBrush}"
+                                >
+                            <CommandBar.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="10,0,0,0" Text="Manage Users" Style="{ThemeResource TextBlockColumnHeader}" VerticalAlignment="Center" />
+                                    <TextBlock Margin="20,0,5,0" Text="Filter By Role" VerticalAlignment="Center"/>
+                                    <ComboBox 
+                                        x:Name="cmbRolesFilter"
+                                        ItemsSource="{x:Bind ViewModel.RolesForCombo, Mode=OneWay}" 
+                                        MinWidth="200"
+                                        SelectedItem="{x:Bind ViewModel.RolesComboSelectedItem, Mode=TwoWay}"
+                                        SelectionChanged="cmbRolesFilter_SelectionChanged"
+                                        >
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate x:DataType="local:UserRole">
+                                                <TextBlock Text="{x:Bind Name}"/>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </StackPanel>
+                            </CommandBar.Content>
+                            <AppBarButton x:Name="btnAddUserProfile" 
+                                          Command="{x:Bind ViewModel.AddCommand}" 
+                                      Icon="Add" Label="Add User"
+                                          Click="btnAddUserProfile_Click"
+                                              ToolTipService.ToolTip="Add User"
+                                      />
+                            <AppBarButton Command="{x:Bind ViewModel.RefreshCommand}" 
+                                      Icon="Refresh" Label="Refresh"
+                                      />
+                            <AppBarButton 
+                                x:Name="appbtnResetPassword"
+                                IsEnabled="{x:Bind ViewModel.SelectedProfile, Mode=OneWay, Converter={StaticResource NullToBooleanConverter}}"
+                                Label="Reset Password"
+                                    ToolTipService.ToolTip="Reset Password"
+                                Click="appbtnResetPassword_Click"
+                                          >
+                                <AppBarButton.Icon>
+                                    <FontIcon FontFamily="Assets/Fonts/scfonticons.ttf#scfonticons" Glyph="&#xe85e;"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                            <AppBarSeparator/>
+                            <CommandBar.SecondaryCommands>
+                                <AppBarButton Command="{x:Bind ViewModel.ImportCommand}" 
+                                      Icon="ImportAll" Label="Import Users"
+                                              ToolTipService.ToolTip="Import Users"
+                                      />
+                                <AppBarSeparator/>
+                                <AppBarButton Command="{x:Bind ViewModel.DeleteCommand}" 
+                                      IsEnabled="False" Icon="Delete" Label="Delete Role(s)"
+                                              ToolTipService.ToolTip="Delete Roles(s)"
+                                      />
+                            </CommandBar.SecondaryCommands>
+                        </CommandBar>
+                    </Border>
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition Width=".4*"/>
+                            <ColumnDefinition Width=".3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.ColumnSpan="4" 
+                    BorderThickness="0,1,0,1" 
+                    BorderBrush="{ThemeResource StreetcatDefaultBlue}"/>
+                        <CheckBox HorizontalAlignment="Center">
+                            <CheckBox.RenderTransform>
+                                <TranslateTransform X="12"/>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+                        <TextBlock Grid.Column="1" Style="{StaticResource TextBlockColumnHeader}" 
+                       HorizontalAlignment="Left"
+                       Text="User Name"/>
+                        <TextBlock Grid.Column="2" Style="{StaticResource TextBlockColumnHeader}" 
+                       HorizontalAlignment="Left"
+                       Text="Email"/>
+                        <TextBlock Grid.Column="3" Style="{StaticResource TextBlockColumnHeader}" 
+                       HorizontalAlignment="Left"
+                       Text="Member Roles"/>
+                    </Grid>
+
+                    <ListView 
+                        x:Name="listOfUsers"
+                            Grid.Row="2" 
+                            HorizontalAlignment="Stretch" 
+                            Grid.ColumnSpan="2" 
+                            Grid.Column="0"
+                            IsItemClickEnabled="True"
+                            ItemsSource="{x:Bind ViewModel.Users, Mode=OneWay}"
+                            ItemTemplate="{StaticResource UserListViewTemplate}"
+                            SelectedItem="{x:Bind ViewModel.SelectedProfile, Mode=TwoWay}"
+                            SelectionChanged="listOfUsers_SelectionChanged"
+                        >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </SplitView.Content>
+            <SplitView.Pane>
+                <Grid x:Name="pane">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="0" 
+                            Background="{ThemeResource SystemControlAccentDark2AcrylicElementAccentDark2MediumHighBrush}"
+                        >
+                        <Canvas Height="50">
+                            <Ellipse Width="50" Height="50" Fill="White" Opacity="1" Stroke="{ThemeResource SystemControlAltMediumLowAcrylicElementMediumBrush}" StrokeThickness="1">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform Y="10" X="10"/>
+                                </Ellipse.RenderTransform>
+                            </Ellipse>
+                            <Ellipse Width="50" Height="50">
+                                <Ellipse.RenderTransform>
+                                    <TranslateTransform Y="10" X="10"/>
+                                </Ellipse.RenderTransform>
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="pictureOfUser" 
+                                                ImageSource="Assets/Admin@2x.png" 
+                                                Opacity="1" 
+                                                Stretch="UniformToFill"
+                                                
+                                                />
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <TextBlock 
+                                Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"
+                                Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                Text="{x:Bind ViewModel.SelectedProfile.FullName, Mode=OneWay}" 
+                                Canvas.Left="75"
+                                Canvas.Top="15"
+                                />
+
+                            <AppBarButton 
+                                x:Name="btnUserProfilePaneClose"
+                                Canvas.Left="560" Canvas.Top="3" 
+                                Width="40"
+                                Background="Transparent" Icon="Cancel" 
+                                Foreground="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                ToolTipService.ToolTip="Close"
+                                Click="btnUserProfilePaneClose_Click"
+                                />
+
+                        </Canvas>
+                    </Border>
+                    <ContentControl x:Name="UserProfileItemView" Grid.Row="1" Margin="10" HorizontalAlignment="Stretch"
+                                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                        <Grid>
+                            <Grid x:Name="UserModifyView" Visibility="Visible">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.ColumnSpan="2" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                <HyperlinkButton x:Name="hlnkChangeProfilePicture">Change</HyperlinkButton>
+                                <Button Grid.Column="1" 
+                                        x:Name="btnkResetPassword" 
+                                        HorizontalAlignment="Right"
+                                        Background="Transparent"
+                                        Click="btnkResetPassword_Click"
+                                        ToolTipService.ToolTip="Reset an existing user's password"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource SpecialSymbolTextblockStyle}"
+                                                   Text="&#xe85e;" VerticalAlignment="Center"/>
+                                        <TextBlock Text="Reset Password" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Button Grid.Column="1" 
+                                        x:Name="btnInviteNewUser" 
+                                        HorizontalAlignment="Right"
+                                        Background="Transparent"
+                                        Click="btnInviteNewUser_Click"
+                                        ToolTipService.ToolTip="Invite newly added user to login to the application."
+                                        IsEnabled="False"
+                                        >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Grid Margin="0,0,20,0">
+                                            <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}"
+                                                Text="&#xf0e0;" 
+                                                VerticalAlignment="Center"
+                                                Opacity=".7"
+                                                Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                                                >
+                                            </TextBlock>
+                                            <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}"
+                                                Text="&#xf2f6;" 
+                                                VerticalAlignment="Center"
+                                                Opacity=".7"
+                                                >
+                                                <TextBlock.RenderTransform>
+                                                    <TranslateTransform X="10" Y="5"/>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock Text="Invite User" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Button>
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Margin="0,10,0,0">
+                                        <TextBox Header="Full Name" Style="{StaticResource TextBoxHeaderRequiredStyle}"
+                                                 Text="{x:Bind ViewModel.EditedUserProfile.FullName, Mode=TwoWay}"
+                                                 InputScope="AlphanumericFullWidth"/>
+                                        <Border BorderThickness="0,0,0,1" 
+                                            BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Margin="0,10,0,0">
+                                        <TextBox x:Name="txtEmailAddress" 
+                                                 Header="Email/Login" 
+                                                 IsEnabled="False"
+                                                 Style="{StaticResource TextBoxHeaderRequiredStyle}"
+                                                 Text="{x:Bind ViewModel.EditedUserProfile.Email, Mode=TwoWay}"
+                                                 InputScope="EmailSmtpAddress"/>
+                                        <Grid x:Name="spEmailConfirmation" >
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Header="Email/Login" 
+                                                 Style="{StaticResource TextBoxHeaderRequiredStyle}"
+                                                 Text="{x:Bind ViewModel.EditedUserProfile.Email, Mode=TwoWay}"
+                                                 InputScope="EmailSmtpAddress"/>
+                                            <TextBox Header="Confirm" 
+                                                     Grid.Column="1"
+                                                 Style="{StaticResource TextBoxHeaderRequiredStyle}"
+                                                 Text="{x:Bind ViewModel.EmailConfirm, Mode=TwoWay}"
+                                                 InputScope="EmailSmtpAddress"/>
+                                        </Grid>
+                                        <Border BorderThickness="0,0,0,1" 
+                                            BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="0,10,0,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <ListView x:Name="listOfRoles" Header="Member Roles" 
+                                                  Style="{StaticResource ListViewHeaderRequiredStyle}"
+                                                  ToolTipService.ToolTip="Choose which roles this user will perform. Select at least one role."
+                                                  ItemsSource="{x:Bind ViewModel.SelectedUserRoles, Mode=OneWay}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate x:DataType="local:UserRoleSelection">
+                                                    <CheckBox IsChecked="{x:Bind IsSelected, Mode=TwoWay}" Content="{x:Bind Role.Name}"/>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                        <TextBlock Grid.Row="1" TextWrapping="Wrap">
+                                            <Italic>
+                                                Select user's roles for the application. Atleast one role is required to save the user information.
+                                            </Italic>
+                                        </TextBlock>
+                                        <Border BorderThickness="0,0,0,1" Grid.RowSpan="2"
+                                            BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    </Grid>
+                                </Grid>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+                                    <AppBarButton
+                                        x:Name="btnPaneEditUserProfile"
+                                        Margin="10" Icon="Save" Label="Save" LabelPosition="Default"
+                                        Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                                        Command="{x:Bind ViewModel.SaveCommand}"
+                                        />
+                                    <AppBarButton 
+                                        x:Name="btnPaneAddUserProfile"
+                                        Margin="10" Icon="Add" Label="Add" LabelPosition="Default"
+                                        Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                                        Command="{x:Bind ViewModel.SaveCommand}"
+                                        />
+                                    <AppBarButton 
+                                        x:Name="btnUserProfileEditCancel" 
+                                        Margin="10" 
+                                        Icon="Cancel" 
+                                        Label="Cancel" 
+                                        LabelPosition="Default"
+                                        Click="btnUserProfileEditCancel_Click"
+                                    />
+                                </StackPanel>
+                            </Grid>
+                            <Grid x:Name="UserPwdResetView" Visibility="Collapsed" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+                                <Grid Margin="0,20,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock FontWeight="Bold" Text="Reset Password"/>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    <TextBlock Grid.Row="1" TextWrapping="Wrap">
+                                        By clicking <Italic>Reset Password</Italic> button below, the user's password is reset and an email is sent to the user with a temporary password.<LineBreak/>
+                                        <LineBreak/>User will be asked to provide a new password at the successful login attempt with the temporary password.
+                                    </TextBlock>
+                                    <Border Grid.Row="1" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlForegroundAccentBrush}"/>
+                                    <AppBarButton Grid.Row="2" HorizontalAlignment="Left" 
+                                                  Command="{x:Bind ViewModel.ResetPwdCommand}" 
+                                      Label="Reset Password"
+                                    ToolTipService.ToolTip="Reset Password"
+                                          >
+                                        <AppBarButton.Icon>
+                                            <FontIcon FontFamily="Assets/Fonts/scfonticons.ttf#scfonticons" Glyph="&#xe85e;"/>
+                                        </AppBarButton.Icon>
+                                    </AppBarButton>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <ContentControl.Transitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition/>
+                            </TransitionCollection>
+                        </ContentControl.Transitions>
+                    </ContentControl>                
+                </Grid>
+            </SplitView.Pane>        
+        </SplitView>
+    </Grid>
+</UserControl>
