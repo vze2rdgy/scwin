@@ -1,0 +1,444 @@
+﻿<Page
+    x:Class="scwin.CustomerAdminView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style x:Key="TextBlockLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <DataTemplate x:Key="OrgLocationTemplate" x:DataType="local:CostCenterDtosGroupedBindable" >
+            <local:ExpandPanel HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                <local:ExpandPanel.HeaderContent>
+                    <Grid>
+                        <TextBlock Text="{x:Bind CostCenter.Name, Mode=OneWay}" HorizontalAlignment="Left"/>
+                        <Button 
+                            x:Name="btnEditLocation"  
+                            Grid.Row="6" HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            Margin="0,0,12,0" Background="#FFF2F2F2" 
+                            BorderBrush="#FF78A6C8" Foreground="#FF78A6C8" 
+                            Width="77" Height="32" FontWeight="SemiBold" 
+                            Click="btnEditLocation_Click" >
+                            <StackPanel Orientation="Horizontal" Spacing="8" >
+                                <SymbolIcon Symbol="Edit" Width="20" Height="20"/>
+                                <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Edit</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </local:ExpandPanel.HeaderContent>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="2" />
+                        <RowDefinition/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Location Details-->
+                    <Grid Grid.Row="0" RowSpacing="8" Margin="20,20,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Header - Customer Details-->
+                        <ListView ItemsSource="{x:Bind Addresses, Mode=OneWay}" Header="Addresses" Grid.ColumnSpan="2">
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="local:AddressKeyValuePair">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Key, Mode=OneWay}"/>
+                                        <TextBlock Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Value.ToString(), Mode=OneWay}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockLabel}"> Phone</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockLabel}"> Fax</TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockLabel}"> Email</TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.Phone, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.Fax, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.Email, Mode=OneWay}"/>
+                    </Grid>
+
+                    <!--White line-->
+                    <Border Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" ></Border>
+
+                    <!--Other Details-->
+                    <Grid Grid.Row="2" RowSpacing="8" Margin="20,20,0,20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Header - Customer Details-->
+                        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.ColumnSpan ="2">
+                            <TextBlock FontSize="20" Margin="0,0,0,12"> Other Details</TextBlock>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Payment Method</TextBlock>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Payment Terms</TextBlock>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Invoice desc</TextBlock>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Credit terms</TextBlock>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Credit limit</TextBlock>
+                        <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource TextBlockLabel}" > Shipping agent</TextBlock>
+
+                        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.PaymentMethodCode, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.PaymentTermCode, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.InvoiceDescCode, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.CreditTerm, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.CreditLimit, Mode=OneWay}"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind CostCenter.ShippingAgentCode, Mode=OneWay}"/>
+                    </Grid>
+
+                    <!--White line-->
+                    <Border Grid.Row="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Border>
+
+                    <!--Contact header-->
+
+                    <TextBlock Grid.Row="4" Grid.Column="0"  VerticalAlignment="Center" FontSize="20" Margin="20,12,0,12">Contacts</TextBlock>
+                    <Button x:Name="btnAddContact" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,12,0" Background="#FFF2F2F2" BorderBrush="#FF78A6C8" Foreground="#FF78A6C8" Width="77" Height="32" FontWeight="SemiBold" 
+                                                Click="btnAddContact_Click">
+                        <StackPanel Orientation="Horizontal" Spacing="8" >
+                            <SymbolIcon Symbol="Add" Width="20" Height="20"/>
+                            <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Add</TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <ListView Grid.Row="5" x:Name="ContactsList" SelectionMode="None" ItemsSource="{x:Bind Contacts,Mode=OneWay}" >
+                        <ListView.ItemContainerStyle>
+
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Padding" Value="0"/>
+                                <Setter Property="Margin" Value="0,0,0,20"/>
+
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:CustomerContactKeyValuePair">
+                                <Grid RowSpacing="12">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!--Section 1-->
+                                    <Grid Grid.Row="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="110"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Height="74" Width="74" StrokeThickness="2" VerticalAlignment="Top" >
+                                            <Ellipse.Stroke>
+                                                <AcrylicBrush BackgroundSource="HostBackdrop" TintColor="{ThemeResource SystemRevealAltLowColor}" TintTransitionDuration="5"/>
+                                            </Ellipse.Stroke>
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="ms-appx:///Assets/Fhs.jpg" Stretch="UniformToFill"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <StackPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                                            <TextBlock FontSize="15" FontWeight="SemiBold" Text="{x:Bind Value.FullName, Mode=OneWay}"/>
+                                            <TextBlock FontSize="13" Text="{x:Bind Value.Phone1, Mode=OneWay}"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" FontSize="13" Text="PhoneNumber" VerticalAlignment="Center"/>
+                                    </Grid>
+
+                                    <!--Section 2-->
+                                    <Grid Grid.Row="1" RowSpacing="8">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="110"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--Edit Contact-->
+                                        <Button x:Name="btnEditContact" 
+                                                Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"  
+                                                HorizontalAlignment="Center" VerticalAlignment="Top"  Background="#FFF2F2F2" 
+                                                BorderBrush="#FF78A6C8" Foreground="#FF78A6C8"
+                                                Click="btnEditContact_Click"
+                                                >
+                                            <SymbolIcon Symbol="Edit"/>
+                                        </Button>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="1" Text= "Facebook" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text= "LinkedIn" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="1" Text= "Email" VerticalAlignment="Center"/>
+
+                                        <TextBlock Grid.Row="0" Grid.Column="2" Text= "{x:Bind Value.Facebook, Mode=OneWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Row="1" Grid.Column="2" Text= "{x:Bind Value.LinkedIn, Mode=OneWay}" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Row="2" Grid.Column="2" Text= "{x:Bind Value.Email, Mode=OneWay}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </local:ExpandPanel>
+        </DataTemplate>
+        
+    </Page.Resources>
+    <Grid >
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DisplayCustomerEditPanelsStateGroup">
+                <VisualState x:Name="DisplayCustomerOrgEditPanelState">
+                    <VisualState.Setters>
+                        <Setter Target="ctlAddEditCustomerOrg.Visibility" Value="Visible"/>
+                        <Setter Target="ctlAddEditLocation.Visibility" Value="Collapsed"/>
+                        <Setter Target="ctlAddEditCustomerContact.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="DisplayLocationEditPanelState">
+                    <VisualState.Setters>
+                        <Setter Target="ctlAddEditCustomerOrg.Visibility" Value="Collapsed"/>
+                        <Setter Target="ctlAddEditLocation.Visibility" Value="Visible"/>
+                        <Setter Target="ctlAddEditCustomerContact.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="DisplayContactEditPanelState">
+                    <VisualState.Setters>
+                        <Setter Target="ctlAddEditCustomerOrg.Visibility" Value="Collapsed"/>
+                        <Setter Target="ctlAddEditLocation.Visibility" Value="Collapsed"/>
+                        <Setter Target="ctlAddEditCustomerContact.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <SplitView 
+            x:Name="svCustomerDetails" 
+            OpenPaneLength="800" 
+            PanePlacement="Right" 
+            PaneBackground="White"
+            PaneClosing="svCustomerDetails_PaneClosing"
+            PaneOpening="svCustomerDetails_PaneOpening"
+        >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" MinWidth="800"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <Grid x:Name="gridCustomer" Background="#FFF2F2F2" Margin="30,20,0,10"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <!-- Header -->
+                        <Grid Grid.Row="0" Margin="20,12,0,20" RowSpacing="8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Header - Customer Name-->
+                            <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="{x:Bind Customer.Organization.Name, Mode=OneWay}" FontSize="36" FontWeight="Light" Margin="0,0,0,12" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            <Button x:Name="btnEditCustomer" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,12,0" Background="#FFF2F2F2" BorderBrush="#FF78A6C8" Foreground="#FF78A6C8" Width="77" Height="32" FontWeight="SemiBold"
+                                Click="btnEditCustomer_Click">
+                                <StackPanel Orientation="Horizontal" Spacing="8" >
+                                    <SymbolIcon Symbol="Edit" Width="20" Height="20"/>
+                                    <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Edit</TextBlock>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Header - Customer Details-->
+                            <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="Code"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="Name"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="Facebook"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="LinkedIn"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="Website"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Style="{StaticResource TextBlockLabel}" Text="Notes"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.Code, Mode=OneWay}" />
+                            <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.Name, Mode=OneWay}" />
+                            <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.Facebook, Mode=OneWay}" />
+                            <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.LinkedIn, Mode=OneWay}" />
+                            <TextBlock Grid.Row="6" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.Website, Mode=OneWay}" />
+                            <TextBlock Grid.Row="7" Grid.Column="1" Style="{StaticResource TextBlockLabel}" Text="{x:Bind Customer.Organization.Name, Mode=OneWay}"/>
+
+                        </Grid>
+
+                        <!--White line-->
+                        <Border Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Border>
+
+                        <!--Location header-->
+                        <TextBlock Grid.Row="2" Grid.Column="0"  Margin="20,0,0,0" VerticalAlignment="Center" FontSize="24" FontWeight="SemiLight">Main Location</TextBlock>
+                        <!--White line-->
+                        <Border Grid.Row="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Border>
+                        <!--Default-->
+                        <ContentControl 
+                            Grid.Row="4" 
+                            ContentTemplate="{StaticResource OrgLocationTemplate}" 
+                            Content="{x:Bind Customer.DefaultCostCenter}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            />
+
+                        <!--White line-->
+                        <Border Grid.Row="5" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Border>
+
+                        <!--Location header-->
+                        <TextBlock Grid.Row="6" Grid.Column="0"  Margin="20,0,0,0" VerticalAlignment="Center" FontSize="24" FontWeight="SemiLight">Other Locations</TextBlock>
+                        
+                        <Button x:Name ="btnAddLocation"  Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,12,0" Background="#FFF2F2F2" BorderBrush="#FF78A6C8" Foreground="#FF78A6C8" Width="77" Height="32" FontWeight="SemiBold" 
+                            Click="btnAddLocation_Click">
+                            <StackPanel Orientation="Horizontal" Spacing="8" >
+                                <SymbolIcon Symbol="Add" Width="20" Height="20"/>
+                                <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Add</TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <!--White line-->
+                        <Border Grid.Row="7" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Border>
+                        <!--Locations-->
+                        <ListView 
+                            Grid.Row="8" 
+                            x:Name="lvLocations" 
+                            SelectionMode="None" 
+                            ItemsSource="{x:Bind Customer.CostCenters, Mode=OneWay}" 
+                            ItemTemplate="{StaticResource OrgLocationTemplate}"
+                            >
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+            <SplitView.Pane>
+                <local:CompositionShadow  
+                    BlurRadius="6"
+                    OffsetX="5"
+                    OffsetY="5"
+                    OffsetZ="-5"
+                    Color="DarkGray"
+                    Margin="0,0,0,10"
+                    ShadowOpacity="1.0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    >
+                    <Grid Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Header-->
+                        <Border Grid.Row="0" Background="{ThemeResource SystemControlAccentDark1AcrylicElementAccentDark1Brush}"/>
+                        <TextBlock Grid.Row="0"  Foreground="White" VerticalAlignment="Center" Margin="20" Text="{x:Bind PaneTitle, Mode=OneWay}"/>
+                        <Button Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Background="Transparent"  >
+                            <SymbolIcon Symbol="Refresh"/>
+                        </Button>
+
+                        <ScrollViewer Grid.Row="1">
+                            <Grid >
+                                <local:AddEditCustomerOrg x:Name="ctlAddEditCustomerOrg"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    CustomerOrg="{x:Bind ViewModel.Current, Mode=OneWay}"
+                                />
+                                <local:AddEditLocation x:Name="ctlAddEditLocation"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                />
+                                <local:AddEditCustomerContact x:Name="ctlAddEditCustomerContact"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                />
+                            </Grid>
+                        </ScrollViewer>
+
+                        
+                        <!--Action Buttons-->
+                        <StackPanel Grid.Row="2" Margin="20" Orientation="Horizontal" VerticalAlignment="Top" Spacing="40">
+                            <Button 
+                                    x:Name="btnPanelEdit" Background="#FF005A9E" 
+                                    Foreground="White" Height="32" 
+                                    FontWeight="SemiBold" Width="96"
+                                    Click="btnPanelEdit_Click"
+                                    >
+                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <SymbolIcon Symbol="Save" Width="20" Height="20"/>
+                                    <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Save</TextBlock>
+                                </StackPanel>
+                            </Button>
+                            <Button 
+                                    x:Name="btnPanelCancel" Background="White" 
+                                    Foreground="#FF005A9E" BorderBrush="#FF005A9E" 
+                                    Height="32" BorderThickness="1" Width="96"
+                                    Click="btnPanelCancel_Click"
+                                    >
+                                <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <SymbolIcon Symbol="Cancel" Width="20" Height="20"/>
+                                    <TextBlock FontSize="16" VerticalAlignment="Bottom" FontWeight="SemiBold" Margin="0,0,0,0">Cancel</TextBlock>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </local:CompositionShadow>
+            </SplitView.Pane>
+        </SplitView>
+    </Grid>
+</Page>
