@@ -1,0 +1,37 @@
+﻿<ContentDialog
+    x:Class="scwin.FamilySetupLookup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"    
+    MaxWidth="800"
+    MaxHeight="800"
+>
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <TextBlock>
+                <Run FontSize="18pt" FontWeight="ExtraBold" Text="Product Family"/>
+            </TextBlock>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Top">
+            <Button x:Name="btnAccept" Click="btnAccept_Click">
+                <SymbolIcon Symbol="Accept"/>
+            </Button>
+            <Button x:Name="btnCloseWindow" Click="btnCloseWindow_Click">
+                <SymbolIcon Symbol="Cancel"/>
+            </Button>
+        </StackPanel>
+        <local:ProductFamilies x:Name="ProductFamilies" Extended="False" Grid.ColumnSpan="2"/>
+    </Grid>
+
+    
+</ContentDialog>
