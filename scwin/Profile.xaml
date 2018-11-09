@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="scwin.Profile"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400" DataContextChanged="UserControl_DataContextChanged">
+
+    <Grid Margin="0,0,0,-39">
+        <Image
+            HorizontalAlignment="Left" 
+            Height="90" Margin="28,41,0,0" 
+            VerticalAlignment="Top" 
+            Width="90" 
+            Source="profile.png" 
+            Stretch="Fill" 
+            ToolTipService.ToolTip="Click here to change profile picture" Tapped="Image_Tapped"
+        />
+        <TextBlock HorizontalAlignment="Left" Margin="28,20,0,0" TextWrapping="Wrap" Text="Profile Picture" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,136,0,0" TextWrapping="Wrap" Text="Full Name" VerticalAlignment="Top"/>
+        <TextBox x:Name="FullNameText" HorizontalAlignment="Left" Margin="28,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="270"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,217,0,0" TextWrapping="Wrap" Text="Change Password" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,246,0,0" TextWrapping="Wrap" Text="Old" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,282,0,0" TextWrapping="Wrap" Text="New" VerticalAlignment="Top"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="274,278,0,0" VerticalAlignment="Top" Tapped="UserProfileUpdate_Tapped"/>
+        <PasswordBox x:Name="OldPassword" HorizontalAlignment="Left" Margin="72,241,0,0" VerticalAlignment="Top" Width="197" PasswordRevealMode="Peek"/>
+        <PasswordBox x:Name="NewPassword" HorizontalAlignment="Left" Margin="72,278,0,0" VerticalAlignment="Top" Width="197" PasswordRevealMode="Peek"/>
+        <Button Content="Update" HorizontalAlignment="Left" Margin="302,158,0,0" VerticalAlignment="Top" Tapped="PasswordUpdate_Tapped"/>
+        <Popup x:Name="profilePictureSelect" >
+            <local:PictureSelection />
+        </Popup>
+    </Grid>
+</UserControl>

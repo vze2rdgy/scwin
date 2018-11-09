@@ -1,0 +1,1388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Common">
+      <UniqueIdentifier>2f973ddd-d5cb-4583-a462-4ebac8a704dc</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>396b4466-d696-4bb0-87bb-3a29e514192d</UniqueIdentifier>
+      <Extensions>bmp;fbx;gif;jpg;jpeg;tga;tiff;tif;png</Extensions>
+    </Filter>
+    <Filter Include="DTO">
+      <UniqueIdentifier>{3d31b528-683d-4015-8884-2cfd498275f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataService">
+      <UniqueIdentifier>{83413a41-ccc2-4f97-a588-c0ba62367fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{d1030a52-9799-482e-a44e-deecfeb07b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tasks">
+      <UniqueIdentifier>{d48cb75c-b82b-4635-a457-4ec90d00ede7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controls">
+      <UniqueIdentifier>{d62acf93-bee7-4a5d-9c91-cd8ee9f1b62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Fonts">
+      <UniqueIdentifier>{8335d4f9-fa89-42ee-951e-ce3141039a75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Themes">
+      <UniqueIdentifier>{be5219bf-bb95-4cce-9dd7-b1f1f70b6c35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Assets\Images">
+      <UniqueIdentifier>{cd6390b4-40d1-4cab-bfd0-d9e932e3f698}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{1cba1be5-0e1b-4097-af73-b9763be91306}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views">
+      <UniqueIdentifier>{3bbc2206-95e8-4c1d-ac2a-bfbc1535b68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Triggers">
+      <UniqueIdentifier>{1900fe2b-174c-4ded-ac11-9be500c0008f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Converters">
+      <UniqueIdentifier>{e1ca400f-e955-4a15-8f07-d5e735a1d366}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{e4541ba8-3627-4716-ae28-dc72980ad52c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Http">
+      <UniqueIdentifier>{7c2f8d39-0372-4456-b35f-0df87072c533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{50017df1-ca08-4c16-9628-1c91a82fa1c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Validation">
+      <UniqueIdentifier>{7d06d453-a5f1-4422-9d61-f238e8223218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views\TemplateSelectors">
+      <UniqueIdentifier>{06e7daf6-9fca-47ab-a625-e2993ebf51ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Behaviors">
+      <UniqueIdentifier>{a7ba0603-dbae-4ce0-bd59-8292680fbda3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exceptions">
+      <UniqueIdentifier>{b49a51b6-52cb-4e3a-b8e7-5bef4f737dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views\Animation">
+      <UniqueIdentifier>{01f90bc3-e990-4d0a-a7f4-cd521402e14b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views\DepProperties">
+      <UniqueIdentifier>{e3a329e2-27e6-4b2a-81da-5ee070f2082e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading">
+      <UniqueIdentifier>{4361c8de-3ac3-457f-bb56-0be79f35a929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Toasts">
+      <UniqueIdentifier>{cc49a51c-b9d7-4c5b-a8b8-350237e4be8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects">
+      <UniqueIdentifier>{45ac641f-b7c4-4932-a36f-cd334debaf55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logging">
+      <UniqueIdentifier>{7ae66ba0-7370-4b03-bf57-e48cae79114e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.xaml.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="scLocalDataService.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="scRemoteDataService.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="scMainViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerStatusCheckBTask.cpp">
+      <Filter>Tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="SignIn.xaml.cpp" />
+    <ClCompile Include="SignUp.xaml.cpp" />
+    <ClCompile Include="CommonLogoHeader.xaml.cpp" />
+    <ClCompile Include="CommonFooter.xaml.cpp" />
+    <ClCompile Include="scSignupViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="scSignInViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SysInfoHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MainDashboard.xaml.cpp" />
+    <ClCompile Include="NavMenuListView.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="NavMenuItem.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="IsTenFootTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="Administration.xaml.cpp" />
+    <ClCompile Include="Customers.xaml.cpp" />
+    <ClCompile Include="Orders.xaml.cpp" />
+    <ClCompile Include="StartupEventArgs.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="MainPage.xaml.cpp" />
+    <ClCompile Include="PlugInFilter.cpp">
+      <Filter>Http</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="NotifierT.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="UserContext.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="StreetcatAppTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="ProfileDataBuilder.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="BindableBase.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="BrushConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="LayoutAwarePage.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="Equatables.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ObservableDictionary.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="ObservableList.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SuspensionManager.cpp">
+      <Filter>System</Filter>
+    </ClCompile>
+    <ClCompile Include="Account.xaml.cpp" />
+    <ClCompile Include="Profile.xaml.cpp" />
+    <ClCompile Include="UserProfile.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidationMask.cpp">
+      <Filter>Validation</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureSelection.xaml.cpp" />
+    <ClCompile Include="UserRole.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="NativeTypeWrapper.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="AdminDataBuilder.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpDataService.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="ReplicationService.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="BackgroundTaskHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="HttpClient.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="MediaCaptureHelper.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductCategory.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="Product.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="SqliteDataManager.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductAttribute.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductPricePlan.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="UserRoles.xaml.cpp" />
+    <ClCompile Include="UserProfiles.xaml.cpp" />
+    <ClCompile Include="ProductCategoryHierarchy.xaml.cpp" />
+    <ClCompile Include="SqliteHandleManager.cpp">
+      <Filter>DataService</Filter>
+    </ClCompile>
+    <ClCompile Include="BooleanToVisibilityConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="GlyphConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandStateToVisibilityConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="PubSubService.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductInventory.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="IProductAttributeValue.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductFamily.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ByteToImageConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductEditAttributes.xaml.cpp" />
+    <ClCompile Include="ProductEditDetails.xaml.cpp" />
+    <ClCompile Include="ProductEditPricing.xaml.cpp" />
+    <ClCompile Include="ProductManageImages.xaml.cpp" />
+    <ClCompile Include="ProductImage.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeComplete.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchContexts.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="XamlHelper.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewLifeTimeController.cpp">
+      <Filter>Views</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiViewControl.xaml.cpp" />
+    <ClCompile Include="ExpandPanel.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewToEditorView.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="BooleanToStringConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductViewPanels.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="NullVisibilityConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="NullToBooleanConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ReverseBooleanConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductImageEditView.xaml.cpp" />
+    <ClCompile Include="PricePlanStandardDetails.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="PricePlanTierDetails.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductImageAvailabilityConverte.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="PricePlanDetailsTemplateSelector.cpp">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClCompile>
+    <ClCompile Include="PricePlanViewModelFacade.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="SharedViewModels.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrencyConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTimeFormatConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="Enumerable.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="PricePlanLookup.xaml.cpp" />
+    <ClCompile Include="PricePlanDetailsCompactTemplateSelector.cpp">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralAttributeValue.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeViewModelFacade.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertyNotSetConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="VisualStateTriggerConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="DTODefaultLessComparer.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerAssignedSalesReps.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerContact.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerOrg.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="COrgCostCenter.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldRep.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductAttributeAndValue.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="CountToVisibilityConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeSetupLookup.xaml.cpp" />
+    <ClCompile Include="COrgGridView.xaml.cpp" />
+    <ClCompile Include="FamilySetupLookup.xaml.cpp" />
+    <ClCompile Include="CustomerDtosGroupedBindable.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomerViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Address.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="OrientationStateTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="PhoneFormatConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelKeyValuePairs.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="StringToUriConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTimeHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SerialTaskScheduler.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="HashingHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusMessage.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusMessageTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusMessageTemplateSelector.cpp">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStateVisibilityTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductView.xaml.cpp" />
+    <ClCompile Include="ProductGridView.xaml.cpp" />
+    <ClCompile Include="StringList.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="StringLengthConverters.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductFamilies.xaml.cpp" />
+    <ClCompile Include="Products.xaml.cpp" />
+    <ClCompile Include="DTOWrappers.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductsSelectList.xaml.cpp" />
+    <ClCompile Include="SaleOrderViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="SalesOrderDtos.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="Date.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="SalesOrderWrapper.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="AppProperty.cpp" />
+    <ClCompile Include="ChoooseACustomer.xaml.cpp" />
+    <ClCompile Include="ChooseAProduct.xaml.cpp" />
+    <ClCompile Include="OrdersGridView.xaml.cpp" />
+    <ClCompile Include="SalesOrderView.xaml.cpp" />
+    <ClCompile Include="AddressView.xaml.cpp" />
+    <ClCompile Include="CustomerViewControl.xaml.cpp" />
+    <ClCompile Include="OrderGroupedInfoList.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductWithInventoryWrapper.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneralStatus.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="PricePlanAllInOneSelector.cpp">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductInventoryLocation.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductInventoryProperties.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductInventoryTransaction.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="ProductInventoryFacade.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="Themes\AppDataTemplates.xaml.cpp" />
+    <ClCompile Include="WinApiHelpers.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscountTypeToBooleanConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscountTypeToTextConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="ToastNotifyHelper.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceFamilyStateTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInteractionStateTrigger.cpp">
+      <Filter>Triggers</Filter>
+    </ClCompile>
+    <ClCompile Include="MobView.xaml.cpp" />
+    <ClCompile Include="AppNavigator.xaml.cpp" />
+    <ClCompile Include="CompositionShadow.xaml.cpp" />
+    <ClCompile Include="Enums.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="UserAdminView.xaml.cpp" />
+    <ClCompile Include="UserRoleControl.xaml.cpp" />
+    <ClCompile Include="DataStateEnableConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitView.xaml.cpp" />
+    <ClCompile Include="ProductInventories.xaml.cpp" />
+    <ClCompile Include="ProductInventoryViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="AddressEditControl.xaml.cpp" />
+    <ClCompile Include="CustomerAdminView.xaml.cpp" />
+    <ClCompile Include="AppTabView.xaml.cpp" />
+    <ClCompile Include="BreadcrumbEventArgs.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
+    <ClCompile Include="BreadcrumbItem.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="BreadcrumbControl.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsView.xaml.cpp" />
+    <ClCompile Include="UpdateOrg.xaml.cpp" />
+    <ClCompile Include="UpdateOrgDetails.xaml.cpp" />
+    <ClCompile Include="AppBusinessOrg.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>DTO</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsViewModel.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="EditAppBusinessOrg.xaml.cpp" />
+    <ClCompile Include="StringToDataTemplateConverter.cpp">
+      <Filter>Converters</Filter>
+    </ClCompile>
+    <ClCompile Include="EditAppBusinessMoreDetails.xaml.cpp" />
+    <ClCompile Include="ContentControlRevised.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="GridOrListView.cpp">
+      <Filter>Controls</Filter>
+    </ClCompile>
+    <ClCompile Include="AddEditCustomerContact.xaml.cpp" />
+    <ClCompile Include="AddEditCustomerOrg.xaml.cpp" />
+    <ClCompile Include="AddEditLocation.xaml.cpp" />
+    <ClCompile Include="BreadcrumbData.cpp" />
+    <ClCompile Include="FileLogging.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggingHelpers.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggingEventArgs.cpp">
+      <Filter>Logging</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="App.xaml.h" />
+    <ClInclude Include="scLocalDataService.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="scRemoteDataService.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="scMainViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerStatusCheckBTask.h">
+      <Filter>Tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="SignIn.xaml.h" />
+    <ClInclude Include="SignUp.xaml.h" />
+    <ClInclude Include="CommonLogoHeader.xaml.h" />
+    <ClInclude Include="CommonFooter.xaml.h" />
+    <ClInclude Include="Delegates.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="scSignupViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="scSignInViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SysInfoHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MainDashboard.xaml.h" />
+    <ClInclude Include="NavMenuListView.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="NavMenuItem.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="IsTenFootTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="Administration.xaml.h" />
+    <ClInclude Include="Customers.xaml.h" />
+    <ClInclude Include="Orders.xaml.h" />
+    <ClInclude Include="StartupEventArgs.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="MainPage.xaml.h" />
+    <ClInclude Include="PlugInFilter.h">
+      <Filter>Http</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="NotifierT.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="UserContext.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StreetcatAppTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="ProfileDataBuilder.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableBase.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="BrushConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="LayoutAwarePage.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="Equatables.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservableDictionary.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservableList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SuspensionManager.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="Account.xaml.h" />
+    <ClInclude Include="Profile.xaml.h" />
+    <ClInclude Include="UserProfile.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidationMask.h">
+      <Filter>Validation</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureSelection.xaml.h" />
+    <ClInclude Include="UserRole.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="NativeTypeWrapper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminDataBuilder.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpDataService.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="ReplicationService.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundTaskHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="HttpClient.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="MediaCaptureHelper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductCategory.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="Product.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="SqliteDataManager.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductAttribute.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductPricePlan.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="AppProperty.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="dto.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="UserRoles.xaml.h" />
+    <ClInclude Include="UserProfiles.xaml.h" />
+    <ClInclude Include="ProductCategoryHierarchy.xaml.h" />
+    <ClInclude Include="SqliteHandleManager.h">
+      <Filter>DataService</Filter>
+    </ClInclude>
+    <ClInclude Include="BooleanToVisibilityConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="GlyphConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandStateToVisibilityConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="PubSubService.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductInventory.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="IProductAttributeValue.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductFamily.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ByteToImageConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductEditAttributes.xaml.h" />
+    <ClInclude Include="ProductEditDetails.xaml.h" />
+    <ClInclude Include="ProductEditPricing.xaml.h" />
+    <ClInclude Include="ProductManageImages.xaml.h" />
+    <ClInclude Include="ProductImage.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeComplete.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SearchContexts.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="XamlHelper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewLifeTimeController.h">
+      <Filter>Views</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiViewControl.xaml.h" />
+    <ClInclude Include="ExpandPanel.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewToEditorView.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="BooleanToStringConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="cpplinq.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="typedefinitions.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductViewPanels.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="NullVisibilityConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="NullToBooleanConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ReverseBooleanConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductImageEditView.xaml.h" />
+    <ClInclude Include="PricePlanStandardDetails.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanTierDetails.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductImageAvailabilityConverte.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanDetailsTemplateSelector.h">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanViewModelFacade.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedViewModels.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="CurrencyConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTimeFormatConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="Enumerable.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanLookup.xaml.h" />
+    <ClInclude Include="PricePlanDataItem.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanDetailsCompactTemplateSelector.h">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralAttributeValue.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeViewModelFacade.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertyNotSetConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualStateTriggerConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="DTODefaultLessComparer.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerAssignedSalesReps.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerContact.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerOrg.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="COrgCostCenter.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldRep.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductAttributeAndValue.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="CountToVisibilityConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeSetupLookup.xaml.h" />
+    <ClInclude Include="COrgGridView.xaml.h" />
+    <ClInclude Include="FamilySetupLookup.xaml.h" />
+    <ClInclude Include="CustomerDtosGroupedBindable.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomerViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Address.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ITriggerValue.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="OrientationStateTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="PhoneFormatConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelKeyValuePairs.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="StringToUriConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTimeHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SerialTaskScheduler.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="HashingHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusMessage.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusMessageTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusMessageTemplateSelector.h">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStateVisibilityTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="ProductView.xaml.h" />
+    <ClInclude Include="ProductGridView.xaml.h" />
+    <ClInclude Include="StringList.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="StringLengthConverters.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductFamilies.xaml.h" />
+    <ClInclude Include="Products.xaml.h" />
+    <ClInclude Include="DTOWrappers.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductsSelectList.xaml.h" />
+    <ClInclude Include="SaleOrderViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="SalesOrderDtos.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="Date.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SalesOrderWrapper.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ChoooseACustomer.xaml.h" />
+    <ClInclude Include="ChooseAProduct.xaml.h" />
+    <ClInclude Include="OrdersGridView.xaml.h" />
+    <ClInclude Include="SalesOrderView.xaml.h" />
+    <ClInclude Include="AddressView.xaml.h" />
+    <ClInclude Include="CustomerViewControl.xaml.h" />
+    <ClInclude Include="OrderGroupedInfoList.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductWithInventoryWrapper.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneralStatus.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="PricePlanAllInOneSelector.h">
+      <Filter>Views\TemplateSelectors</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductInventoryLocation.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductInventoryProperties.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductInventoryTransaction.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="ProductInventoryFacade.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Themes\AppDataTemplates.xaml.h" />
+    <ClInclude Include="WinApiHelpers.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscountTypeToBooleanConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="DiscountTypeToTextConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="ToastNotifyHelper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceFamilyStateTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInteractionStateTrigger.h">
+      <Filter>Triggers</Filter>
+    </ClInclude>
+    <ClInclude Include="MobView.xaml.h" />
+    <ClInclude Include="AppNavigator.xaml.h" />
+    <ClInclude Include="CompositionShadow.xaml.h" />
+    <ClInclude Include="UserAdminView.xaml.h" />
+    <ClInclude Include="UserRoleControl.xaml.h" />
+    <ClInclude Include="DataStateEnableConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitView.xaml.h" />
+    <ClInclude Include="ProductInventories.xaml.h" />
+    <ClInclude Include="ProductInventoryViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="AddressEditControl.xaml.h" />
+    <ClInclude Include="CustomerAdminView.xaml.h" />
+    <ClInclude Include="AppTabView.xaml.h" />
+    <ClInclude Include="BreadcrumbEventArgs.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="BreadcrumbItem.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="BreadcrumbControl.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsView.xaml.h" />
+    <ClInclude Include="UpdateOrg.xaml.h" />
+    <ClInclude Include="UpdateOrgDetails.xaml.h" />
+    <ClInclude Include="AppBusinessOrg.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>DTO</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsViewModel.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="EditAppBusinessOrg.xaml.h" />
+    <ClInclude Include="StringToDataTemplateConverter.h">
+      <Filter>Converters</Filter>
+    </ClInclude>
+    <ClInclude Include="EditAppBusinessMoreDetails.xaml.h" />
+    <ClInclude Include="ContentControlRevised.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="GridOrListView.h">
+      <Filter>Controls</Filter>
+    </ClInclude>
+    <ClInclude Include="AddEditCustomerContact.xaml.h" />
+    <ClInclude Include="AddEditCustomerOrg.xaml.h" />
+    <ClInclude Include="AddEditLocation.xaml.h" />
+    <ClInclude Include="BreadcrumbData.h" />
+    <ClInclude Include="FileLogging.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingHelpers.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingEventArgs.h">
+      <Filter>Logging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\LockScreenLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square150x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Wide310x150Logo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\BadgeLogo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Images\Logo_Blue%401x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Images\Logo_Blue%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Images\Logo_Blue%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\SplashScreen.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="..\..\..\..\artifacts\images\sign-out.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="..\..\..\..\artifacts\images\profile.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Images\mona-lisa-74050_640.jpg">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Images\mona-lisa-74050_1280.jpg">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-100.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-125.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-150.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-200.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\StoreLogo.scale-400.png">
+      <Filter>Assets</Filter>
+    </Image>
+    <Image Include="Assets\Admin%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Admin%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Brochures%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Brochures%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Catalog%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Catalog%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Customers%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Customers%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Home%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Home%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Orders%402x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\Orders%403x.png">
+      <Filter>Assets\Images</Filter>
+    </Image>
+    <Image Include="Assets\LogoPlaceholder.png">
+      <Filter>Assets</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="scwin_TemporaryKey.pfx" />
+    <None Include="..\..\..\..\artifacts\images\sign-out.svg">
+      <Filter>Assets\Images</Filter>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="SignIn.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="SignUp.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Filter>Themes</Filter>
+    </Page>
+    <Page Include="CommonLogoHeader.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="CommonFooter.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="Themes\TenFeetStylesSheet.xaml">
+      <Filter>Themes</Filter>
+    </Page>
+    <Page Include="MainDashboard.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="Customers.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="Orders.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="Administration.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="MainPage.xaml" />
+    <Page Include="Account.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="Profile.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="PictureSelection.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="ProductEditDetails.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductManageImages.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductEditPricing.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductEditAttributes.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="MultiViewControl.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="ProductImageEditView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="PricePlanLookup.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="AttributeSetupLookup.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="FamilySetupLookup.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="COrgGridView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductGridView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="Products.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductFamilies.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductsSelectList.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="OrdersGridView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ChoooseACustomer.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ChooseAProduct.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="SalesOrderView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="CustomerViewControl.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="AddressView.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="Themes\AppDataTemplates.xaml">
+      <Filter>Themes</Filter>
+    </Page>
+    <Page Include="MobView.xaml" />
+    <Page Include="GenericStreetcatDefault.xaml">
+      <Filter>Themes</Filter>
+    </Page>
+    <Page Include="AppNavigator.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="CompositionShadow.xaml">
+      <Filter>Effects</Filter>
+    </Page>
+    <Page Include="UserAdminView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="UserRoles.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="UserRoleControl.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="UserProfiles.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="WaitView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="ProductInventories.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="AddressEditControl.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="ProductCategoryHierarchy.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="CustomerAdminView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="AppTabView.xaml" />
+    <Page Include="SettingsView.xaml">
+      <Filter>Views</Filter>
+    </Page>
+    <Page Include="UpdateOrg.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="UpdateOrgDetails.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="Themes\BreadcrumbControlResourceDict.xaml">
+      <Filter>Themes</Filter>
+    </Page>
+    <Page Include="EditAppBusinessOrg.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="EditAppBusinessMoreDetails.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="AddEditCustomerOrg.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="AddEditLocation.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+    <Page Include="AddEditCustomerContact.xaml">
+      <Filter>Controls</Filter>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Fonts\scfonticons.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="Assets\Fonts\fa-brands-400.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="Assets\Fonts\fa-regular-400.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+    <Font Include="Assets\Fonts\fa-solid-900.ttf">
+      <Filter>Assets\Fonts</Filter>
+    </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="scwin.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="ProductTierPriceChosenToast.xml">
+      <Filter>Toasts</Filter>
+    </Xml>
+  </ItemGroup>
+</Project>

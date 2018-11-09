@@ -1,0 +1,11 @@
+<toast>
+  <visual>
+    <binding template = 'ToastGeneric'>
+      <text>Ghost Toast</text>
+      <text>Time's up</text>"
+    </binding>
+  </visual>"
+  <actions>
+    <action content = 'dismiss' activationType='foreground' arguments = 'dismiss'/>
+  </actions>
+</toast>

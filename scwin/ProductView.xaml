@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="scwin.ProductView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+    <Grid>
+        <ScrollViewer>
+            <Grid HorizontalAlignment="Stretch" Padding="4,4,15,4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <local:ExpandPanel Grid.Row="0" x:Name="GeneralPanel" IsExpanded="{x:Bind ViewModel.ProductPanels[0].IsExpanded, Mode=TwoWay}">
+                    <local:ExpandPanel.HeaderContent>
+                        <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0, 0, 0, 2">
+                            <TextBlock FontWeight="ExtraBold" Text="General" />
+                        </Border>
+                    </local:ExpandPanel.HeaderContent>
+                    <local:ExpandPanel.Content>
+                        <local:ProductEditDetails ViewModel="{x:Bind ViewModel, Mode=OneWay}"/>
+                    </local:ExpandPanel.Content>
+                </local:ExpandPanel>
+
+                <local:ExpandPanel x:Name="ImagesPanel" Grid.Row="1" IsExpanded="{x:Bind ViewModel.ProductPanels[1].IsExpanded, Mode=TwoWay}">
+                    <local:ExpandPanel.HeaderContent>
+                        <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0, 0, 0, 2">
+                            <TextBlock FontWeight="ExtraBold" Text="Images" />
+                        </Border>
+                    </local:ExpandPanel.HeaderContent>
+                    <local:ExpandPanel.Content>
+                        <local:ProductManageImages ViewModel="{x:Bind ViewModel, Mode=OneWay}"/>
+                    </local:ExpandPanel.Content>
+                </local:ExpandPanel>
+
+                <local:ExpandPanel x:Name="PricePanel" Grid.Row="2" IsExpanded="{x:Bind ViewModel.ProductPanels[2].IsExpanded, Mode=TwoWay}">
+                    <local:ExpandPanel.HeaderContent>
+                        <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0, 0, 0, 2">
+                            <TextBlock FontWeight="ExtraBold" Text="Price Plan" />
+                        </Border>
+                    </local:ExpandPanel.HeaderContent>
+                    <local:ExpandPanel.Content>
+                        <local:ProductEditPricing ViewModel="{x:Bind ViewModel, Mode=OneWay}"/>
+                    </local:ExpandPanel.Content>
+                </local:ExpandPanel>
+
+
+                <local:ExpandPanel x:Name="AttributesPanel" Grid.Row="3" IsExpanded="{x:Bind ViewModel.ProductPanels[3].IsExpanded, Mode=TwoWay}">
+                    <local:ExpandPanel.HeaderContent>
+                        <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0, 0, 0, 2">
+                            <TextBlock FontWeight="ExtraBold" Text="Family and Attributes" />
+                        </Border>
+                    </local:ExpandPanel.HeaderContent>
+                    <local:ExpandPanel.Content>
+                        <local:ProductEditAttributes ViewModel="{x:Bind ViewModel, Mode=OneWay}"/>
+                    </local:ExpandPanel.Content>
+                </local:ExpandPanel>
+
+            </Grid>
+        </ScrollViewer>
+
+    </Grid>
+
+</Page>
