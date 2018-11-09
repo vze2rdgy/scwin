@@ -1,0 +1,309 @@
+﻿<Page
+    x:Class="scwin.OrdersGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Key="vsAllOrders" 
+                              Source="{x:Bind ViewModel.GroupedOrders,Mode=OneWay}"
+                              IsSourceGrouped="True" 
+                              ItemsPath="Orders"/>
+        
+    </Page.Resources>
+
+    <Grid x:Name="rootGridOrders" Margin="10">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="vsgOrderViewStates">
+                <VisualState x:Name="vsGridView">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind ViewModel.IsOrderviewInListViewMode, Converter={StaticResource ReverseBooleanConverter}, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="gridViewOfOrders.Visibility" Value="Visible"/>
+                        <Setter Target="listViewOfOrders.Visibility" Value="Collapsed"/>
+                        <Setter Target="txtViewTypeIcon.Text" Value="&#xe880;"/>
+                        <Setter Target="txtViewTypeText.Text" Value="Tiles"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="vsListView">
+                    <VisualState.StateTriggers>
+                        <StateTrigger IsActive="{x:Bind ViewModel.IsOrderviewInListViewMode, Mode=OneWay}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="gridViewOfOrders.Visibility" Value="Collapsed"/>
+                        <Setter Target="listViewOfOrders.Visibility" Value="Visible"/>
+                        <Setter Target="txtViewTypeIcon.Text" Value="&#xe86c;"/>
+                        <Setter Target="txtViewTypeText.Text" Value="List"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,2,10,2" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnOrderSortBy" Margin="4">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource SpecialSymbolTextblockStyle}" Text="&#xe8d0;" VerticalAlignment="Center"/>
+                    <TextBlock Text="{x:Bind ViewModel.CurrentSortSelection, Mode=OneWay}"/>
+                </StackPanel>
+                <Button.Flyout>
+                    <MenuFlyout x:Name="mnuOrderSorts"/>
+                </Button.Flyout>
+            </Button>
+            <Button x:Name="btnOrderGridViewType" Grid.Column="1" Margin="4" Click="btnOrderGridViewType_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Name="txtViewTypeIcon" Style="{StaticResource SpecialSymbolTextblockStyle}" Text="&#xe880;"  VerticalAlignment="Center" Visibility="Visible"/>
+                    <TextBlock x:Name="txtViewTypeText" Text="Tiles" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+        <GridView x:Name="gridViewOfOrders" Grid.Row="1" 
+                  Visibility="Visible" 
+                  IsItemClickEnabled="True"
+                  ItemsSource="{Binding Source={StaticResource vsAllOrders}}">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:SalesOrderWrapper">
+                    <TextBlock Text="{x:Bind Order.OrderNumber, Mode=OneWay}"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid MaximumRowsOrColumns="3"/>
+                </ItemsPanelTemplate>
+            </GridView.ItemsPanel>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate x:DataType="local:OrderGroupedInfoList">
+                            <Grid>
+                                <TextBlock Text="{x:Bind Key, Mode=OneWay}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </GridView.GroupStyle>
+        </GridView>
+        <Grid x:Name="listViewOfOrders" Grid.Row="1" Visibility="Visible" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource GridHeaderHeight}"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".2*"/>
+                    <ColumnDefinition Width=".2*"/>
+                </Grid.ColumnDefinitions>
+                <Border Background="{StaticResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}" Grid.ColumnSpan="5" CornerRadius="5,5,0,0"/>
+                <TextBlock Text="Order #" Grid.Column="0" Style="{StaticResource TextBlockColumnHeader}"/>
+                <TextBlock Text="Date Ordered"  Grid.Column="1" Style="{StaticResource TextBlockColumnHeader}"/>
+                <TextBlock Text="Customer"  Grid.Column="2" Style="{StaticResource TextBlockColumnHeader}"/>
+                <TextBlock Text="Total"  Grid.Column="3" Style="{StaticResource TextBlockColumnHeader}"/>
+                <TextBlock Text="Status"  Grid.Column="4" Style="{StaticResource TextBlockColumnHeader}"/>
+            </Grid>
+            <ListView x:Name="lvOrders" Grid.Row="1" HorizontalAlignment="Stretch" 
+                      ItemsSource="{x:Bind ViewModel.Orders, Mode=OneWay}"
+                      IsItemClickEnabled="True"
+                      SelectedItem="{x:Bind ViewModel.CurrentOrder, Mode=TwoWay}"
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:SalesOrderWrapper">
+                        <Grid HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".2*"/>
+                                <ColumnDefinition Width=".2*"/>
+                                <ColumnDefinition Width=".2*"/>
+                                <ColumnDefinition Width=".2*"/>
+                                <ColumnDefinition Width=".2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan="5" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0,0,0,1"/>
+                            <TextBlock Text="{x:Bind Order.OrderNumber}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="{x:Bind Order.DateAndTime.ToShortFormatString()}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="{x:Bind Customer.Name}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="{x:Bind OrderFinal}" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Column="4" Text="{x:Bind OrderStatus.PublicName}" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </Grid>
+        
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                   Visibility="{x:Bind ViewModel.Orders.Size, Converter={StaticResource CountToVisibilityConverterInverse}, Mode=OneWay}"
+                   Text="There are no orders to show."/>
+
+        <local:ExpandPanel x:Name="panelForOrderDetails" 
+            Grid.Row="2"
+            HorizontalAlignment="Stretch"
+            Visibility="{x:Bind ViewModel.CurrentOrder, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"
+            IsExpanded="True"
+            >
+            <local:ExpandPanel.HeaderContent>
+                <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="0, 0, 0, 2">
+                    <TextBlock FontWeight="ExtraBold" Text="Order Details" />
+                </Border>
+            </local:ExpandPanel.HeaderContent>
+            <local:ExpandPanel.Content>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <AppBarButton Grid.ColumnSpan="2" x:Name="btnEditOrder" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"
+                                  Icon="Edit"
+                                  Label="Edit Order"
+                                  Click="btnEditOrder_Click"
+                                  />
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Style="{StaticResource TextBlockWithHeaderLeftAlignedStyle}" 
+                                     Header="Order Number"
+                                     Text="{x:Bind ViewModel.CurrentOrder.Order.OrderNumber, Mode=OneWay}"
+                                    HorizontalAlignment="Left"
+                                     />
+                            <local:CustomerViewControl Grid.Row="1"
+                                Customer="{x:Bind ViewModel.CurrentOrder.Customer, Mode=OneWay}" 
+                                CostCenter="{x:Bind ViewModel.CurrentOrder.CostCenter, Mode=OneWay}"
+                                Contact="{x:Bind ViewModel.CurrentOrder.Contact, Mode=OneWay}"
+                                BillingAddress="{x:Bind ViewModel.CurrentOrder.BillingAddress, Mode=OneWay}"
+                                ShippingAddress="{x:Bind ViewModel.CurrentOrder.ShippingAddress, Mode=OneWay}"
+                            />
+                            <Grid Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBox Style="{StaticResource TextBlockWithHeaderCenterAlignedStyle}" 
+                                         Header="Placed On"
+                                         Text="{x:Bind ViewModel.CurrentOrder.Order.DateAndTime.ToShortFormatString(), Mode=OneWay}"
+                                         HorizontalAlignment="Stretch"
+                                         />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Style="{StaticResource TextBlockWithHeaderCenterAlignedStyle}"
+                                    Header="Current Order Status"
+                                    Text="{x:Bind ViewModel.CurrentOrder.OrderStatus.PublicName, Mode=OneWay}"/>
+                                <TextBox
+                                    Grid.Row="2"
+                                    Style="{StaticResource TextBlockWithHeaderCenterAlignedStyle}"
+                                    Header="Current Payment Status"
+                                    Text="{x:Bind ViewModel.CurrentOrder.PaymentStatus.PublicName, Mode=OneWay}"/>
+                                <TextBox Grid.Row="3"
+                                         Style="{StaticResource TextBlockWithHeaderCenterAlignedStyle}"
+                                         FontWeight="Bold"
+                                         Header="Order Total (After Discounts and Taxes)"
+                                         Text="{x:Bind ViewModel.CurrentOrder.OrderFinal, Mode=OneWay}"/>
+                                <TextBox Grid.Row="4"
+                                           Style="{StaticResource TextBlockWithHeaderCenterAlignedStyle}"
+                                         Header="Customer Expects On"
+                                         Text="{x:Bind ViewModel.CurrentOrder.Order.CustomerExpectedDate.ToShortFormatString(),Mode=OneWay}"
+                                         />
+                            </Grid>
+                        </Grid>
+                        <ListView Grid.Row="2" 
+                                  ItemsSource="{x:Bind ViewModel.CurrentOrder.OrderDetails, Mode=OneWay}"
+                                  HorizontalAlignment="Left"
+                                  MinWidth="600"
+                                  >
+                            <ListView.Resources>
+                                <GridLength x:Key="ProductImage">32</GridLength>
+                                <GridLength x:Key="ProductColumn">.6*</GridLength>
+                                <GridLength x:Key="QuantityColumn">.2*</GridLength>
+                                <GridLength x:Key="TotalColumn">.2*</GridLength>
+                            </ListView.Resources>
+                            <ListView.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{StaticResource ProductImage}"/>
+                                            <ColumnDefinition Width="{StaticResource ProductColumn}"/>
+                                            <ColumnDefinition Width="{StaticResource QuantityColumn}"/>
+                                            <ColumnDefinition Width="{StaticResource TotalColumn}"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.ColumnSpan="2">
+                                            <Underline>
+                                                Product
+                                            </Underline>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="2" HorizontalAlignment="Right">
+                                            <Underline>
+                                                Quantity
+                                            </Underline>
+                                        </TextBlock>
+                                        <TextBlock Grid.Column="3" HorizontalAlignment="Right">
+                                            <Underline>
+                                                Line Total
+                                            </Underline>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.HeaderTemplate>
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:DataType="local:SalesOrderDetailsWrapper">
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="{StaticResource ProductImage}"/>
+                                            <ColumnDefinition Width="{StaticResource ProductColumn}"/>
+                                            <ColumnDefinition Width="{StaticResource QuantityColumn}"/>
+                                            <ColumnDefinition Width="{StaticResource TotalColumn}"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Width="32" Height="32" 
+                                                Source="{x:Bind ProductItem.ProductItem.TitleImage.Image,Mode=OneWay}"/>
+                                        <TextBlock MaxWidth="400" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Text="{x:Bind ProductName, Mode=OneWay}"/>
+                                        <TextBlock Grid.Column="2" Text="{x:Bind Quantity}" HorizontalAlignment="Right"/>
+                                        <TextBlock Grid.Column="3" Text="{x:Bind InnerItem.Net}" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </local:ExpandPanel.Content>
+        </local:ExpandPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,100 @@
+﻿<ContentDialog
+    x:Class="scwin.PricePlanLookup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Existing Price Plans Picker"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+
+    <ContentDialog.Resources>
+
+        <DataTemplate x:Key="PricePlanStandDetails" x:DataType="local:PricePlanStandardDetails">
+            <StackPanel>
+                <TextBlock Text="Standard"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="PricePlanTierDetails" x:DataType="local:PricePlanTierDetails">
+            <StackPanel>
+                <TextBlock Text="Tiered"/>
+            </StackPanel>
+        </DataTemplate>
+
+    </ContentDialog.Resources>
+
+    <ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="List of Available Price Plans"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <Button Tapped="AcceptButton_Tapped">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+                    <Button Tapped="CloseButton_Tapped">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"></TextBox>
+            <Button Grid.Column="1" HorizontalAlignment="Right">
+                <SymbolIcon Symbol="Find"/>
+            </Button>
+        </Grid> 
+        <ListView x:Name="PricePlanList" ItemsSource="{x:Bind PricePlanitems}" Grid.Row="1" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:PricePlanDataItem">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <RadioButton />
+                        <Grid Grid.Column="1"/>
+                        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Vertical">
+                            <TextBlock FontWeight="Bold">
+                            <Bold>
+                                <Bold.Inlines>
+                                    <Run Text="Type: "/>
+                                    <Run Text="{x:Bind PlanType}"/>
+                                </Bold.Inlines>
+                            </Bold>
+
+                            </TextBlock>
+                            <ListView ItemsSource="{x:Bind DetailsList}" ItemTemplateSelector="{StaticResource PricePlanDetailsCompactTemplateSelector}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>    
+        </ListView>
+    </Grid>
+</ContentDialog>

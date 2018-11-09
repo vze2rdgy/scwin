@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="scwin.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" 
+    Background="{ThemeResource StreetcatDefaultBlue}"
+    >
+    <Grid 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center"
+            >
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5,5,5,5">
+            <local:CommonLogoHeader 
+                    VerticalContentAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    HorizontalContentAlignment="Center" 
+                    Margin="0, 0, 0, 2"/>
+            <TextBox 
+                Name="txtMessage" 
+                Style="{StaticResource StatusMessageStyle}" 
+                HorizontalAlignment="Stretch" 
+                HorizontalContentAlignment="Center"
+                Visibility="{Binding LastError, Converter={StaticResource StringLengthVisibilityConverter}}"
+                Text="{Binding LastError}"
+                />
+            <ContentControl Name="mainContent" HorizontalAlignment="Center"/>
+            <RelativePanel Padding="20, 20, 10, 20" >
+                <local:CommonFooter x:Name="ctlFooter" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5, 10, 5, 5"/>
+                <TextBlock Style="{StaticResource SpecialSymbolTextElementStyle}" FontSize="9" RelativePanel.AlignRightWith="ctlFooter" RelativePanel.AlignRightWithPanel="True" Text="{Binding Version}" />
+            </RelativePanel>
+        </StackPanel>
+    </Grid>
+</Page>
