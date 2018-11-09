@@ -1,0 +1,197 @@
+﻿<Page
+    x:Class="scwin.ProductGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+
+
+        <local:ProductImageAvailabilityConverter x:Key="ProductImageAvailabilityConverter"/>
+
+
+        <DataTemplate x:Key="ProductTileView" x:DataType="local:Product">
+            <Border BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" 
+                            BorderThickness="1" 
+                            Height="320" 
+                            Width="220"
+                            Padding="4,4,4,4"
+                    Margin="4,4,4,4"
+                    CornerRadius="10"
+                    >
+                <RelativePanel x:Name="ProductItem">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image 
+                            Grid.Row="0" 
+                            Width="140"
+                            Height="140"
+                            HorizontalAlignment="Center"
+                            Visibility="{x:Bind TitleImage, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}"
+                            Source="{x:Bind TitleImage.Image, Mode=OneWay}"
+                        />
+                        <Border
+                            Grid.Row="0" 
+                            Width="140"
+                            Height="140"
+                            Padding="5,5,5,5"
+                            Visibility="{x:Bind TitleImage, , Mode=OneWay, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"
+                            HorizontalAlignment="Center"
+                            >
+                            <Path Stroke="Red" StrokeThickness="3" Fill="{ThemeResource AppBarButtonBackground}">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <RectangleGeometry Rect="3,3,125,125" />
+                                        <LineGeometry StartPoint="3, 3" EndPoint="126, 126"/>
+                                        <LineGeometry StartPoint="3, 128" EndPoint="128, 3"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                        </Border>
+                        <ProgressRing
+                            Grid.Row="0" 
+                            Width="140"
+                            Height="140"
+                            HorizontalAlignment="Center"
+                            IsActive="{x:Bind IsTitleImageLoading, Mode=OneWay}"
+                            Visibility="{x:Bind IsTitleImageLoading, Converter={StaticResource ReverseBooleanToVisibilityConverter}, Mode=OneWay}"
+                            />
+                        <TextBlock Grid.Row="1" Text="{x:Bind Name, Mode=OneWay}" VerticalAlignment="Bottom" TextWrapping="WrapWholeWords" />
+                    </Grid>
+                    
+                    <Button 
+                        x:Name="btnProductView"
+                            RelativePanel.AlignRightWithPanel="True" 
+                            RelativePanel.AlignBottomWithPanel="True"
+                            Visibility="Visible"
+                            Tag="{x:Bind}"
+                            Tapped="btnProductView_Tapped">
+                        <SymbolIcon Symbol="View"/>
+                    </Button>
+                </RelativePanel>
+            </Border>
+        </DataTemplate>
+
+    </Page.Resources>
+
+
+    <!--The top area will be a bread crumb. A persisted data will be used to obtain
+        the last selected subcategory level and it will be used to build a breadcrump
+        as well as the query to get the products under the catetgory. During first load
+        when no such settings is available, we will show a icon for product category
+        and a message to inform the user to touch there. Also all products
+        will be displayed. There is also a sort dropdown (sort by name, price, category, etc)
+        -->
+
+    <Grid x:Name="rootGridProducts" Margin="50,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal">
+                <SymbolIcon Symbol="Bullets" VerticalAlignment="Center"/>
+                <ListView Name="lstCategoryBreadCrump" 
+                          VerticalAlignment="Center"
+                         ItemsSource="{x:Bind CategoryBreadcrump, Mode=TwoWay}"
+                         SelectionChanged="lstCategoryBreadCrump_SelectionChanged"
+                          SelectionMode="None"
+                         >
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <ItemsStackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:ProductCategory">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="{x:Bind Name}" TextDecorations="Underline" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Button 
+                                    Style="{StaticResource SpecialSymbolButtonStyle}"
+                                    Tapped="HyperlinkButton_Tapped" 
+                                    Content="&#xe833;"
+                                    Tag="{x:Bind}"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout x:Name="flyOutCategories">
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="10, 2, 10, 2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnProductSort" 
+                    Grid.Column="0" 
+                    Margin="3" 
+                    >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource SpecialSymbolTextblockStyle}" Text="&#xe8d0;" VerticalAlignment="Center"/>
+                        <TextBlock Text="{x:Bind CurrentSort}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Name" Tapped="MenuFlyoutItem_Tapped" />
+                        <MenuFlyoutItem Text="Origin" Tapped="MenuFlyoutItem_Tapped" />
+                        <MenuFlyoutItem Text="Price" Tapped="MenuFlyoutItem_Tapped" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+            <Button 
+                x:Name="btnProductViewType" 
+                Grid.Column="1" 
+                Margin="3"
+                Command="{x:Bind ViewTypeCommand}"
+                >
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource SpecialSymbolTextblockStyle}" Text="&#xe880;"  VerticalAlignment="Center"/>
+                        <TextBlock Text="Tiles" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <ListView 
+            Grid.Row="1" 
+            Grid.ColumnSpan="2"
+            x:Name="listViewProducts" 
+            ItemsSource="{x:Bind DisplayedProducts, Mode=TwoWay}"
+            SelectedItem="{x:Bind SelectedProduct, Mode=TwoWay}"
+            ItemClick="listViewProducts_ItemClick"
+            ItemTemplate="{StaticResource ProductTileView}"
+            >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+    </Grid>
+</Page>

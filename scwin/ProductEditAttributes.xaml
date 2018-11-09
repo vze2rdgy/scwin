@@ -1,0 +1,660 @@
+﻿<UserControl
+    x:Class="scwin.ProductEditAttributes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:col="using:Windows.Foundation.Collections"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+
+        <Style x:Name="TextInputBox" TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="MinWidth" Value="200"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Name="TextBlockBox" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="MinWidth" Value="200"/>
+            </Style.Setters>
+        </Style>
+
+        <DataTemplate x:Key="GeneralAttributeValueReadView" x:DataType="local:ProductAttributeAndValue">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" 
+                               Grid.ColumnSpan="3"/>
+
+                <TextBlock 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        Grid.RowSpan="3" 
+                >
+                    <TextBlock.Inlines>
+                        <Run Text="{x:Bind Ordinal}"/>
+                        <Run Text=")"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <!--Name-->
+                        <RowDefinition/>
+                        <!--Type-->
+                        <RowDefinition/>
+                        <!--Desc-->
+                        <RowDefinition/>
+                        <!--Default Attribute Flag-->
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Style="{StaticResource LabelTextBlock}" Text="Name" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Attribute.Name}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1"  Style="{StaticResource LabelTextBlock}" Text="Type" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Attribute.Type}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Style="{StaticResource LabelTextBlock}" Text="Description" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Attribute.Description}" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="3" Grid.Column="1" 
+                               VerticalAlignment="Center" 
+                               Visibility="{x:Bind IsProductDefaultAttribute, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                               Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                               >
+                        <Italic>
+                        <Run Text="("/>
+                        <Run Text="Default Attribute"/>
+                        <Run Text=")"/>
+                            </Italic>
+                    </TextBlock>
+                </Grid>
+                <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <!--Value-->
+                        <RowDefinition/>
+                        <!--UOM-->
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Style="{StaticResource LabelTextBlock}" Text="Value" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Value.Value}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Style="{StaticResource LabelTextBlock}" Text="UOM" ToolTipService.ToolTip="Unit of measurement (lbs, kg, mtr, cm, etc)" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Value.Uom}" VerticalAlignment="Center"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="GeneralAttributeValueEditView" x:DataType="local:ProductAttributeAndValue">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock 
+                        HorizontalAlignment="Right" 
+                        VerticalAlignment="Top"
+                        Grid.RowSpan="3" 
+                >
+                    <TextBlock.Inlines>
+                        <Run Text="{x:Bind Ordinal}"/>
+                        <Run Text=")"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <!--Name-->
+                        <RowDefinition/>
+                        <!--Type-->
+                        <RowDefinition/>
+                        <!--Desc-->
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Style="{StaticResource LabelTextBlock}" Text="Name" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Attribute.Name}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1"  Style="{StaticResource LabelTextBlock}" Text="Type" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Attribute.Type}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="2" Style="{StaticResource LabelTextBlock}" Text="Description" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Bind Attribute.Description}" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Column="2" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <!--Value-->
+                        <RowDefinition/>
+                        <!--UOM-->
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Style="{StaticResource LabelTextBlock}" Text="Value" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{x:Bind Value.Value}" VerticalAlignment="Center"/>
+                    <TextBox Grid.Row="1" Style="{StaticResource LabelTextBlock}" Text="UOM" ToolTipService.ToolTip="Unit of measurement (lbs, kg, mtr, cm, etc)" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{x:Bind Value.Uom}" VerticalAlignment="Center"/>
+                </Grid>
+                <Button x:Name="btnDefaultAttrib" 
+                        Grid.Column="3" Grid.RowSpan="2" 
+                        Tapped="btnDefaultAttrib_Tapped"  
+                        Tag="{x:Bind}"
+                        Visibility="{x:Bind IsProductDefaultAttribute, Converter={StaticResource ReverseBooleanToVisibilityConverter},Mode=OneWay}"
+                        >
+                    <TextBlock Text="Set As Product's Default Attribute" TextWrapping="WrapWholeWords"/>
+                </Button>
+                <TextBlock 
+                    Grid.Column="3" 
+                    Grid.Row="2"
+                    Margin="4"
+                    Text="Current Default Attribute" 
+                    TextWrapping="Wrap"
+                    Visibility="{x:Bind IsProductDefaultAttribute, Converter={StaticResource BooleanToVisibilityConverter},Mode=OneWay}"/>
+                <Button Grid.Column="6" Tapped="btnRemoveAttribute_Tapped" HorizontalAlignment="Right" Tag="{x:Bind}">
+                    <SymbolIcon Symbol="Delete"/>
+                </Button>
+            </Grid>
+        </DataTemplate>
+
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+    </UserControl.Resources>
+
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OperationalStates">
+                <VisualState x:Name="NoDataState">
+                    <VisualState.Storyboard>
+                        <Storyboard>
+                            <FadeInThemeAnimation Storyboard.TargetName="btnPricePlanEdit"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanEdit" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeOutThemeAnimation Storyboard.TargetName="btnPricePlanSave"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanSave" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeOutThemeAnimation Storyboard.TargetName="btnPricePlanCancel"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanCancel" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeInThemeAnimation Storyboard.TargetName="NoDataStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="NoDataStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeOutThemeAnimation Storyboard.TargetName="ReadStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="ReadStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeOutThemeAnimation Storyboard.TargetName="WriteStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="WriteStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState.Storyboard>
+                    <VisualState.StateTriggers>
+                        <StateTrigger 
+                            IsActive="{x:Bind ViewModel.Attributes.VisualStateTrigger, Converter={StaticResource VisualStateTriggerConverter}, ConverterParameter=NoDataState, Mode=OneWay}"
+                            />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="ReadState">
+                    <VisualState.Storyboard>
+                        <Storyboard>
+                            <FadeInThemeAnimation Storyboard.TargetName="btnPricePlanEdit"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanEdit" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeOutThemeAnimation Storyboard.TargetName="btnPricePlanSave"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanSave" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeOutThemeAnimation Storyboard.TargetName="btnPricePlanCancel"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanCancel" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeOutThemeAnimation Storyboard.TargetName="NoDataStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="NoDataStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeInThemeAnimation Storyboard.TargetName="ReadStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="ReadStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeOutThemeAnimation Storyboard.TargetName="WriteStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="WriteStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState.Storyboard>
+                    <VisualState.StateTriggers>
+                        <StateTrigger 
+                            IsActive="{x:Bind ViewModel.Attributes.VisualStateTrigger, Converter={StaticResource VisualStateTriggerConverter}, ConverterParameter=ReadState, Mode=OneWay}"
+                            />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="WriteState">
+                    <VisualState.Storyboard>
+                        <Storyboard>
+                            <FadeOutThemeAnimation Storyboard.TargetName="btnPricePlanEdit"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanEdit" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeInThemeAnimation Storyboard.TargetName="btnPricePlanSave"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanSave" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+
+                            <FadeInThemeAnimation Storyboard.TargetName="btnPricePlanCancel"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="btnPricePlanCancel" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeOutThemeAnimation Storyboard.TargetName="NoDataStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="NoDataStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeOutThemeAnimation Storyboard.TargetName="ReadStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="ReadStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                            </ObjectAnimationUsingKeyFrames>
+                            <FadeInThemeAnimation Storyboard.TargetName="WriteStateView"/>
+                            <ObjectAnimationUsingKeyFrames 
+                                                Storyboard.TargetName="WriteStateView" Storyboard.TargetProperty="Visibility">
+                                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+                            </ObjectAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState.Storyboard>
+                    <VisualState.StateTriggers>
+                        <StateTrigger 
+                            IsActive="{x:Bind ViewModel.Attributes.VisualStateTrigger, Converter={StaticResource VisualStateTriggerConverter}, ConverterParameter=WriteState, Mode=OneWay}"
+                            />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="buttonPanel" Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button 
+                    x:Name="btnPricePlanEdit"
+                    Tapped="btnPricePlanEdit_Tapped"
+                    IsEnabled="{x:Bind ViewModel.ProductPanels[3].IsEdited, Converter={StaticResource ReverseBooleanConverter}}"
+                    ToolTipService.ToolTip="Click/Tap here to start editing product family and attributes..."
+                >
+                    <SymbolIcon Symbol="Edit"/>
+                </Button>
+                <Button 
+                    x:Name="btnPricePlanSave"
+                    Tapped="btnPricePlanSave_Tapped"
+                    Visibility="Collapsed"
+                    ToolTipService.ToolTip="Click here to permanently save the added  family and attributes."
+                >
+                    <SymbolIcon Symbol="Save"/>
+                </Button>
+                <Button 
+                    x:Name="btnPricePlanCancel"
+                    Tapped="btnPricePlanCancel_Tapped"
+                    Visibility="Collapsed"
+                    ToolTipService.ToolTip="Click here to reject the the added  family and attributes."
+                >
+                    <SymbolIcon Symbol="Cancel"/>
+                </Button>
+            </StackPanel>
+
+        </StackPanel>
+        <Grid x:Name="NoDataStateView" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontStyle="Italic" FontWeight="SemiBold" 
+                           Foreground="{ThemeResource SystemControlForegroundAccentBrush}" 
+                           Text="Family or attributes are not setup for this product."/>
+        </Grid>
+        <Grid x:Name="ReadStateView" Visibility="Collapsed" Margin="4,8,4,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel 
+                Grid.Row="0"
+                Orientation="Vertical"
+                Margin="3"
+                >
+                <Border
+                    BorderThickness="0, 0, 0, 1"
+                    BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                    HorizontalAlignment="Left"
+                    >
+                    <TextBlock FontWeight="Bold" Text="Family" Width="250"/>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Stretch"
+                                >
+                        <TextBox Width="90" Style="{StaticResource LabelTextBlock}" Text="Name:" VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{x:Bind ViewModel.Attributes.Family.Name, Mode=OneWay}"
+                            HorizontalAlignment="Stretch"
+                            MinWidth="200"
+                            VerticalAlignment="Center"
+                           >
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                        Grid.Row="1"
+                                >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Width="90" Style="{StaticResource LabelTextBlock}" Text="Short Desc" VerticalAlignment="Center"/>
+                            <TextBlock 
+                                Style="{StaticResource TextBlockBox}"
+                                Text="{x:Bind ViewModel.Attributes.Family.ShortDescription, Mode=OneWay}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Width="90" Style="{StaticResource LabelTextBlock}" Text="Notes" VerticalAlignment="Center"/>
+                            <TextBlock
+                                Style="{StaticResource TextBlockBox}"
+                                TextWrapping="Wrap"
+                                Text="{x:Bind ViewModel.Attributes.Family.Notes, Mode=OneWay}" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel 
+                Grid.Row="1"
+                Orientation="Vertical"
+                Margin="3"
+                >
+                <Border
+                    BorderThickness="0, 0, 0, 1"
+                    HorizontalAlignment="Left" 
+                    BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}">
+                    <TextBlock FontWeight="Bold" Text="Attributes" Width="250"/>
+                </Border>
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ListView 
+                        Grid.Row="1" Grid.ColumnSpan="2" 
+                        Style="{StaticResource FixedHeaderListViewStyle}"
+                        ItemsSource="{x:Bind ViewModel.Attributes.ProductAttributes, Mode=OneWay}"
+                        ItemTemplate="{StaticResource GeneralAttributeValueReadView}"
+                        SelectionMode="None"
+                        >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="136"/>
+                                        <ColumnDefinition Width="273"/>
+                                        <ColumnDefinition Width="200"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border
+                                        BorderThickness="1, 0, 1, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock >
+                                        <Run FontWeight="Bold" Text="#"/>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="1"
+                                        BorderThickness="0, 0, 1, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock >
+                                        <Run FontWeight="Bold" Text="Attribute"/>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="2"
+                                        BorderThickness="0, 0, 1, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock>
+                                        <Run FontWeight="Bold" Text="Attribute Value"/>
+                                        </TextBlock>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                    </ListView>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="WriteStateView" Visibility="Collapsed" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel 
+                Grid.Row="0"
+                Orientation="Vertical"
+                Margin="3"
+                >
+                <Border
+                    BorderThickness="0, 0, 0, 1"
+                    BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                    HorizontalAlignment="Left"
+                    >
+                    <TextBlock FontWeight="Bold" Text="Family" Width="250"/>
+                </Border>
+                <Grid Margin="3,20,3,3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel x:Name="PanelForFamilyName" 
+                                Orientation="Vertical" 
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Stretch"
+                                >
+                        <Button x:Name="btnFamilyLookup" Width="230" Tapped="btnFamilyLookup_Tapped">Find/Manage Product Families</Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.ColumnSpan="2">
+                                <TextBlock Margin="4" VerticalAlignment="Center">
+                                <Bold>
+                                    <Run Text="Name "/>
+                                </Bold>
+                                <Run Text="(You can pick an existing family after entring some text)"/>
+                                </TextBlock>
+                                <AutoSuggestBox x:Name="txtFamily" Margin="4" 
+                                Grid.Column="1"
+                            Text="{x:Bind ViewModel.Attributes.FamilyName, Mode=OneWay}"
+                                                LostFocus="txtFamily_LostFocus"
+                            DisplayMemberPath="Name"
+                            MinWidth="200"
+                            QueryIcon="Find"
+                            TextChanged="txtFamily_TextChanged"
+                            QuerySubmitted="txtFamily_QuerySubmitted"
+                            SuggestionChosen="txtFamily_SuggestionChosen"
+                                                VerticalAlignment="Center"
+                           >
+                                </AutoSuggestBox>
+                            </StackPanel>
+                            <TextBox Grid.Row="1" Margin="4"
+                                     Header="Short Description"
+                                Style="{StaticResource TextBoxStyle}" TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                Text="{x:Bind ViewModel.Attributes.Family.ShortDescription, Mode=TwoWay}"/>
+                            <TextBox
+                                Grid.Row="1" 
+                                Grid.Column="1"
+                                Header="Notes"
+                                Margin="4" 
+                                Style="{StaticResource TextBoxStyle}"
+                                AcceptsReturn="True"
+                                TextWrapping="Wrap"
+                                Text="{x:Bind ViewModel.Attributes.Family.Notes, Mode=TwoWay}"
+                                Height="100"
+                                />
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel 
+                Grid.Row="1"
+                Orientation="Vertical"
+                Margin="3"
+                >
+                <Border
+                    BorderThickness="0, 0, 0, 1"
+                    HorizontalAlignment="Left" 
+                    BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}">
+                    <TextBlock FontWeight="Bold" Text="Attributes" Width="250"/>
+                </Border>
+                <Grid Margin="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnSelectAddAttribute" 
+                            Width="230"
+                            Tapped="btnSelectAddAttribute_Tapped"
+                            >Select or Add Attribute</Button>
+                    <ListView 
+                        Grid.Row="1" Grid.ColumnSpan="2" 
+                        Style="{StaticResource FixedHeaderListViewStyle}"
+                        ItemsSource="{x:Bind ViewModel.Attributes.ProductAttributes, Mode=OneWay}"
+                        ItemTemplate ="{StaticResource GeneralAttributeValueEditView}"
+                        SelectionMode="None"
+                        >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="115"/>
+                                        <ColumnDefinition Width="274"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="20"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border
+                                        BorderThickness="0, 0, 0, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock >
+                                        <Run FontWeight="Bold" Text="#"/>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="1"
+                                        BorderThickness="1, 0, 0, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock >
+                                        <Run FontWeight="Bold" Text="Attribute"/>
+                                        </TextBlock>
+                                    </Border>
+                                    <Border
+                                        Grid.Column="2"
+                                        BorderThickness="1, 0, 0, 1"
+                                        HorizontalAlignment="Stretch" 
+                                        BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                                        Padding="2"
+                                        >
+                                        <TextBlock>
+                                        <Run FontWeight="Bold" Text="Attribute Value"/>
+                                        </TextBlock>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                    </ListView>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

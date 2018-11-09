@@ -1,0 +1,102 @@
+﻿<ContentPresenter
+    x:Class="scwin.ProductImageEditView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    Background="Black"
+    >
+    <!--<ContentDialog.TitleTemplate>
+        <DataTemplate>
+            <StackPanel>
+                <TextBlock Text="Add "
+            </StackPanel>
+        </DataTemplate>
+    </ContentDialog.TitleTemplate>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <RelativePanel Grid.Row="0">
+            <Border
+                Grid.Row="0" 
+                Height="400"
+                Width="400"
+                Visibility="{x:Bind CurrentImage.Image, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True}"
+                >
+                <Path Stroke="Red" StrokeThickness="3" Fill="{ThemeResource AppBarButtonBackground}">
+                    <Path.Data>
+                        <GeometryGroup>
+                            <RectangleGeometry Rect="3,3,390,390" />
+                            <LineGeometry StartPoint="3, 3" EndPoint="389, 389"/>
+                            <LineGeometry StartPoint="3, 389" EndPoint="389, 3"/>
+                        </GeometryGroup>
+                    </Path.Data>
+                </Path>
+            </Border>
+            <Image 
+                HorizontalAlignment="Center" 
+                Grid.Row="0"
+                Height="400"
+                Width="400"
+                Visibility="{x:Bind CurrentImage.Image, Converter={StaticResource NullToVisibilityConverter}}"
+                />
+            
+            <StackPanel Orientation="Vertical" RelativePanel.AlignRightWithPanel="True"
+                        RelativePanel.AlignTopWithPanel="True">
+                <Button 
+                    Command="{x:Bind ViewModel.AddImageCommand}"
+                    ToolTipService.ToolTip="Choose a new or replace existing image by browsing images in the file system."
+                        >
+                    <SymbolIcon Symbol="BrowsePhotos"/>
+                </Button>
+            </StackPanel>
+        </RelativePanel>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"  
+                         Style="{StaticResource LabelTextBlockRequired}"
+                         ToolTipService.ToolTip="Provide a title for this image."
+                         Text="Title"/>
+                <TextBox Grid.Column="1" 
+                         Text="{x:Bind CurrentImage.Title}"/>
+                <TextBox Grid.Row="1" 
+                         Grid.Column="0"  
+                         ToolTipService.ToolTip="Optionally provide a description about this image."
+                         Style="{StaticResource LabelTextBlock}"
+                         Text="Description"/>
+                <TextBox Grid.Row="1"
+                         Grid.Column="1" 
+                         Text="{x:Bind CurrentImage.Description}"/>
+                <TextBox Grid.Column="0"  
+                        Grid.Row="2"
+                         Style="{StaticResource LabelTextBlock}"
+                         ToolTipService.ToolTip="The image's content type. This is displayed when image is selected."
+                         Text="Content Type"/>
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2" 
+                           Text="{x:Bind CurrentImage.ContentType}"/>
+                <CheckBox IsChecked="{x:Bind CurrentImage.IsTitleImage}" 
+                          ToolTipService.ToolTip="Check if this is product's title image. The title image is displayed by default with the product."
+                          Grid.ColumnSpan="2" Grid.Row="3">
+                    Is it product's title image ?
+                </CheckBox>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPresenter>
