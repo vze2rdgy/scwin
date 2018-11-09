@@ -1,0 +1,102 @@
+﻿<ResourceDictionary
+    x:Class="scwin.AppDataTemplates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <DataTemplate x:Key="UnknownPricePlanAllInOneTemplate" x:DataType="local:PricePlanViewModelFacade">
+        <Grid>
+            <TextBlock Text="Unknown Price Plan"/>
+        </Grid>
+    </DataTemplate>
+
+
+    <DataTemplate x:Key="TierPricePlanAllInOneTemplate" x:DataType="local:PricePlanViewModelFacade">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock>
+                    <Underline>Tiered Pricing Plan</Underline>
+            </TextBlock>
+            <Grid Grid.Row="1" Width="200">
+                <Grid.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="Border">
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".3*"/>
+                    <ColumnDefinition Width=".3*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                    <TextBlock Text="Begin Qty" TextWrapping="Wrap"/>
+                </Border>
+                <Border Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                    <TextBlock Text="End Qty" TextWrapping="Wrap"/>
+                </Border>
+                <Border Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                    <TextBlock Text="Price" TextWrapping="Wrap"/>
+                </Border>
+            </Grid>
+            <ListView Grid.Row="2" ItemsSource="{Binding PriceDetails}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="MinHeight" Value="0"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:PricePlanTierDetails">
+                        <Grid Width="200">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                </Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".3*"/>
+                                <ColumnDefinition Width=".3*"/>
+                                <ColumnDefinition Width=".3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderThickness="1,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                                <TextBlock Grid.Column="0" Text="{Binding BeginQuantity}" />
+                            </Border>
+                            <Border Grid.Column="1" BorderThickness="0,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                                <TextBlock Grid.Column="1" Text="{Binding EndQuantity}" />
+                            </Border>
+                            <Border Grid.Column="2" BorderThickness="0,1,1,1" BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}">
+                                <TextBlock Grid.Column="2" Text="{Binding Price}" />
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="StdPricePlanAllInOneTemplate" x:DataType="local:PricePlanViewModelFacade">
+        <TextBlock>
+            <Underline>Standard (Single) Pricing Plan</Underline>
+            <LineBreak/>
+            <Run Text="Price"/>
+            <Run Text="{Binding DefaultPrice.Price}"/>
+        </TextBlock>
+    </DataTemplate>
+
+    <local:PricePlanAllInOneSelector x:Key="PricePlanAllInOneSelector"/>
+
+</ResourceDictionary>
