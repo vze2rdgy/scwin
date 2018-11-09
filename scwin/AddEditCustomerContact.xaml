@@ -1,0 +1,83 @@
+﻿<UserControl
+    x:Class="scwin.AddEditCustomerContact"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Rest of the page-->
+        <Grid Grid.Row="1" Margin="25,20,0,0" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Photo-->
+            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="12" HorizontalAlignment="Left">
+                <Ellipse  Height="100" Width="100" StrokeThickness="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
+                    <Ellipse.Stroke>
+                        <AcrylicBrush TintColor="{ThemeResource SystemRevealAltLowColor}"/>
+                    </Ellipse.Stroke>
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Fhs.jpg" Stretch="UniformToFill" />
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <Button Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"  HorizontalAlignment="Center" VerticalAlignment="Top"  Background="Transparent"  Foreground="#FF005A9E">
+                    <SymbolIcon Symbol="Edit"/>
+                </Button>
+            </StackPanel>
+            <CheckBox  Grid.Row="0" Grid.Column="0" Content="Disable" HorizontalAlignment="Right" IsChecked="{x:Bind ContactInfo.Value.IsActive, Mode=TwoWay}"/>
+
+            <!--First and Last Name-->
+            <Grid Grid.Row="1" ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Header="First name" Style="{StaticResource TextBoxHeaderRequiredStyle}" Text="{x:Bind ContactInfo.Value.FirstName, Mode=TwoWay}" InputScope="AlphanumericFullWidth"/>
+                <TextBox Grid.Column="1" Header="Last name" Style="{StaticResource TextBoxHeaderRequiredStyle}" Text="{x:Bind ContactInfo.Value.LastName, Mode=TwoWay}" InputScope="AlphanumericFullWidth"/>
+            </Grid>
+
+            <!--More Details-->
+            <Grid Grid.Row="2" RowSpacing="12" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+
+                <TextBox Grid.Row="0" Header="Phone 1" Style="{StaticResource TextBoxHeaderRequiredStyle}" Text="{x:Bind ContactInfo.Value.Phone1, Mode=TwoWay}" InputScope="TelephoneNumber"/>
+                <TextBox Grid.Row="1" Header="Phone 2" Style="{StaticResource TextBoxHeaderStyle}" Text="{x:Bind ContactInfo.Value.Phone2, Mode=TwoWay}" InputScope="TelephoneNumber"/>
+                <TextBox Grid.Row="2" Header="Email" Style="{StaticResource TextBoxHeaderRequiredStyle}" Text="{x:Bind ContactInfo.Value.Email, Mode=TwoWay}" InputScope="EmailSmtpAddress"/>
+                <TextBox Grid.Row="3" Header="Cell phone" Style="{StaticResource TextBoxHeaderStyle}" Text="{x:Bind ContactInfo.Value.Cellphone, Mode=TwoWay}" InputScope="TelephoneNumber"/>
+                <TextBox Grid.Row="4" Header="Facebook" Style="{StaticResource TextBoxHeaderStyle}" Text="{x:Bind ContactInfo.Value.Facebook, Mode=TwoWay}" InputScope="Url"/>
+                <TextBox Grid.Row="5" Header="LinkedIn" Style="{StaticResource TextBoxHeaderStyle}" Text="{x:Bind ContactInfo.Value.LinkedIn, Mode=TwoWay}" InputScope="Url"/>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,382 @@
+﻿<local:LayoutAwarePage
+    x:Class="scwin.AppTabView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <local:LayoutAwarePage.Resources>
+        <x:Double x:Key="DefaultHeight">50</x:Double>
+        <Thickness x:Key="FrameMargin">0, 5, 0, 0</Thickness>
+        <DataTemplate x:Key="StatusMessageItemTemplateForInfo" x:DataType="local:StatusMessage">
+            <TextBox 
+                    x:Name="txtMessageBlock"
+                        Foreground="Black"
+                        Text="{x:Bind Message}" 
+                        TextAlignment="Left"
+                        Visibility="{Binding Message, Converter={StaticResource StringLengthVisibilityConverter}}"
+                        >
+                <TextBox.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="5" HorizontalAlignment="Stretch" Margin="2">
+                            <Grid
+                                        HorizontalAlignment="Stretch"
+                                        Background="{TemplateBinding Background}"
+                                        >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Padding="5,0,0,0" 
+                                                        VerticalAlignment="Center" Grid.Column="0" TextAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=TextAlignment}">
+                                            <Run Foreground="{TemplateBinding Foreground}" 
+                                                    Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=OneWay}"/>
+                                </TextBlock>
+                                <Button 
+                                            HorizontalAlignment="Right" Grid.Column="1" Foreground="{ThemeResource SystemControlForegroundChromeBlackMediumBrush}"
+                                            Click="btnRemoveMesage_Click"
+                                        FontFamily="Segoe MDL2 Assets" Content="&#xE106;" FontSize="10"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
+        </DataTemplate>
+        <DataTemplate x:Key="StatusMessageItemTemplateForWarning" x:DataType="local:StatusMessage">
+            <TextBox 
+                x:Name="txtMessageBlock"
+                    Foreground="Black"
+                    Background="Yellow"
+                    Text="{x:Bind Message}" 
+                    TextAlignment="Left"
+                    Visibility="{Binding Message, Converter={StaticResource StringLengthVisibilityConverter}}"
+                    >
+                <TextBox.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="5" HorizontalAlignment="Stretch"  Margin="2">
+                            <Grid
+                                    HorizontalAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Padding="5,0,0,0" 
+                                                    VerticalAlignment="Center" Grid.Column="0" TextAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=TextAlignment}">
+                                        <Run Foreground="{TemplateBinding Foreground}" 
+                                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=OneWay}"/>
+                                </TextBlock>
+                                <Button 
+                                    HorizontalAlignment="Right" Grid.Column="1" 
+                                    Foreground="{ThemeResource SystemControlForegroundChromeBlackMediumBrush}"
+                                    Click="btnRemoveMesage_Click"
+                                    Style="{StaticResource ThemeSymbolFontButton}" 
+                                    Content="&#xE106;" 
+                                    FontSize="10"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
+        </DataTemplate>
+        <DataTemplate x:Key="StatusMessageItemTemplateForError" x:DataType="local:StatusMessage">
+            <TextBox 
+                x:Name="txtMessageBlock"
+                    Foreground="White"
+                    Background="Red"
+                    Text="{x:Bind Message}" 
+                    TextAlignment="Left"
+                    Visibility="{Binding Message, Converter={StaticResource StringLengthVisibilityConverter}}"
+                    >
+                <TextBox.Template>
+                    <ControlTemplate>
+                        <Border CornerRadius="5" HorizontalAlignment="Stretch" Margin="2">
+                            <Grid
+                                    HorizontalAlignment="Stretch"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Padding="5,0,0,0" 
+                                                    VerticalAlignment="Center" Grid.Column="0" TextAlignment="{Binding RelativeSource={RelativeSource TemplatedParent},Path=TextAlignment}">
+                                        <Run Foreground="{TemplateBinding Foreground}" 
+                                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, Mode=OneWay}"/>
+                                </TextBlock>
+                                <Button 
+                                    HorizontalAlignment="Right" 
+                                    Grid.Column="1" 
+                                    Foreground="{ThemeResource SystemControlForegroundChromeBlackMediumBrush}"
+                                    Click="btnRemoveMesage_Click" 
+                                    Style="{StaticResource ThemeSymbolFontButton}" 
+                                    FontSize="10">
+                                    &#xe106;
+                                </Button>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
+        </DataTemplate>
+    </local:LayoutAwarePage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{ThemeResource SystemControlAltHighAcrylicWindowBrush}">
+        <NavigationView x:Name="NavView" PaneTitle="STREETCAT" 
+                        AlwaysShowHeader="True"
+                        CompactPaneLength="42" DataContext="{x:Bind ViewModel}" 
+                        OpenPaneLength="300" 
+                        SelectionChanged="NavView_SelectionChanged"
+                        IsBackButtonVisible="Collapsed"
+                        >
+            <NavigationView.HeaderTemplate>
+                <DataTemplate x:DataType="local:scMainViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="HeaderTitle" 
+                                   Style="{StaticResource TitleTextBlockStyle}" 
+                               FontSize="28" VerticalAlignment="Center" 
+                                   Text="{x:Bind PageTitle, Mode=OneWay}"/>
+                        <CommandBar Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Top" DefaultLabelPosition="Right">
+                            <AppBarButton Icon="Delete"/>
+                            <AppBarButton Label="Import" Icon="Import"/>
+                        </CommandBar>
+                    </Grid>
+                </DataTemplate>
+            </NavigationView.HeaderTemplate>
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Home" Tag="Home">
+                    <NavigationViewItemHeader.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Assets/Home@2x.png" Margin="5" Height="32" Width="32"/>
+                                <ContentPresenter Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </NavigationViewItemHeader.Template>
+                </NavigationViewItemHeader>
+                <NavigationViewItem Tag="Home:Dashboard">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf108;" Margin="3"/>
+                        <TextBlock Text="Dashboard" Margin="5,0,0,0" />
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItemHeader Content="Catalog" Tag="Catalog">
+                    <NavigationViewItemHeader.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Assets/Catalog@2x.png" Margin="5" Height="32" Width="32"/>
+                                <ContentPresenter Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </NavigationViewItemHeader.Template>
+                </NavigationViewItemHeader>
+                <NavigationViewItem Tag="Catalog:Products">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf466;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Products"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Catalog:Analytics">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf200;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Analytics"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Catalog:Brochures">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf02f;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Brochures"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItemHeader Content="Customers" Tag="Customers">
+                    <NavigationViewItemHeader.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Assets/Customers@2x.png" Margin="5" Height="32" Width="32"/>
+                                <ContentPresenter Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </NavigationViewItemHeader.Template>
+                </NavigationViewItemHeader>
+                <NavigationViewItem Tag="Customers:Customers">
+                        <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf1ad;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Customers"/>
+                        </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Customers:Contacts">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf2b9;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Contacts"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Customers:Analytics">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf201;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Analytics"/>
+                    </StackPanel>
+                </NavigationViewItem>
+
+                <NavigationViewItemHeader Content="Orders" Tag="Orders">
+                    <NavigationViewItemHeader.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Assets/Orders@2x.png" Margin="5" Height="32" Width="32"/>
+                                <ContentPresenter Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </NavigationViewItemHeader.Template>
+                </NavigationViewItemHeader>
+                <NavigationViewItem Tag="Orders:Orders">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf1ad;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Orders"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Orders:Analytics">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf080;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Analytics"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItemHeader Content="Admin" Tag="Admin">
+                    <NavigationViewItemHeader.Template>
+                        <ControlTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Image Source="Assets/Admin@2x.png" Margin="5" Height="32" Width="32"/>
+                                <ContentPresenter Margin="5,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </NavigationViewItemHeader.Template>
+                </NavigationViewItemHeader>
+                <NavigationViewItem Tag="Admin:Users">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf0c0;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Manage Users"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Admin:Products">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf466;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Manage Products"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Admin:Inventory">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf472;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Manage Inventory"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Admin:Customers">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf1ad;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Manage Customers"/>
+                    </StackPanel>
+                </NavigationViewItem>
+                <NavigationViewItem Tag="Admin:Orders">
+                    <StackPanel Margin="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Style="{StaticResource FontAwesomeSolidTextblockStyle}" Text="&#xf0d1;" Margin="3"/>
+                        <TextBlock Margin="5,0,0,0" Text="Manage Orders"/>
+                    </StackPanel>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Frame x:Name="frame"
+                       Grid.Row="1"
+                    Margin="{StaticResource FrameMargin}"
+                    Background="{ThemeResource SystemControlAcrylicWindowBrush}"
+                    Navigating="frame_Navigating"
+                    >
+                    <Frame.ContentTransitions>
+                        <TransitionCollection>
+                            <NavigationThemeTransition>
+                                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                    <EntranceNavigationTransitionInfo/>
+                                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                            </NavigationThemeTransition>
+                        </TransitionCollection>
+                    </Frame.ContentTransitions>
+                </Frame>
+                
+                <!-- Status Message Section -->
+
+                <Grid 
+                    VerticalAlignment="Bottom"
+                    Grid.Row="1"
+                    >
+                    <ListView 
+                        ItemsSource="{x:Bind ViewModel.StatusMessages, Mode=OneWay}"
+                        ItemTemplateSelector="{StaticResource StatusMessageTemplateSelector}"
+                        SelectionMode="None"
+                        VerticalAlignment="Bottom"
+                        >
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <local:CompositionShadow 
+                                            BlurRadius="5" 
+                                            OffsetX="10"
+                                            OffsetY="10"
+                                            OffsetZ="10"
+                                            Color="DarkGray"
+                                        >
+                                                <ContentPresenter/>
+                                            </local:CompositionShadow>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                    <Grid Grid.Row="1" 
+                          HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,46,0"
+                          >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Background="#FFD9380F" Grid.Column="0"  >
+                            <TextBlock Foreground="White" FontSize="14"> 
+                                <Run FontFamily="Segoe UI Symbol" Text = "&#57627;"/>
+                                <Run Text="Need help"/>
+                            </TextBlock>
+                        </Button>
+
+                        <Button Background="#FF505050" Grid.Column="1" >
+                            <TextBlock Foreground="White" FontSize="14"> 
+                                <Run FontFamily="Segoe UI Symbol" Text = "&#57757;"/>
+                                <Run Text="Feedback"/>
+                            </TextBlock>
+                        </Button>
+                    </Grid>
+
+                </Grid>
+
+                <!-- breadcrumb control is placed here on top of the frame -->
+                <local:BreadcrumbControl ItemsSource="{x:Bind ViewModel.BreadCrumbs, Mode=OneWay}" Seperator=":">
+                </local:BreadcrumbControl>
+            </Grid>
+        </NavigationView>
+    </Grid>
+</local:LayoutAwarePage>

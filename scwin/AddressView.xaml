@@ -1,0 +1,49 @@
+﻿<UserControl
+    x:Class="scwin.AddressView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid MinWidth="300" MinHeight="150">
+        <Border BorderBrush="{ThemeResource SystemControlBackgroundAccentBrush}" BorderThickness="1" CornerRadius="5"/>
+        <TextBlock Visibility="{x:Bind AddressInstance, Converter={StaticResource NullToVisibilityConverter}, ConverterParameter=True, Mode=OneWay}"
+                   VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Italic>
+                <Run Text="{x:Bind Header}"/>
+                <Run Text="Not Available."/>
+            </Italic>
+        </TextBlock>
+        <Grid Visibility="{x:Bind AddressInstance, Converter={StaticResource NullToVisibilityConverter}, Mode=OneWay}" 
+              Padding="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}">
+            <Underline>
+                <Run Text="{x:Bind Header, Mode=OneWay}" />
+            </Underline>
+            </TextBlock>
+            <TextBlock Text="{x:Bind AddressInstance.Line1, Mode=OneWay}" Grid.Row="1"/>
+            <TextBlock Text="{x:Bind AddressInstance.Line2, Mode=OneWay}" 
+                       Visibility="{x:Bind AddressInstance.Line2, Converter={StaticResource StringLengthVisibilityConverter}}" Grid.Row="2"/>
+            <TextBlock Text="{x:Bind AddressInstance.City, Mode=OneWay}" Grid.Row="3"/>
+            <TextBlock Text="{x:Bind AddressInstance.Province, Mode=OneWay}" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="{x:Bind AddressInstance.PostalCode, Mode=OneWay}" Grid.Row="3" Grid.Column="2"/>
+            <TextBlock Text="{x:Bind AddressInstance.Country, Mode=OneWay}" Grid.Row="4" />
+        </Grid>
+    </Grid>
+</UserControl>

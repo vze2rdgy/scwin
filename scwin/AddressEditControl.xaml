@@ -1,0 +1,100 @@
+﻿<UserControl
+    x:Class="scwin.AddressEditControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:scwin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{x:Bind Header}" FontWeight="Bold" Margin="5,10,0,0"/>
+        <ComboBox 
+            x:Name="cmbAddressList"
+            Grid.Row="1"
+            Header="Select An Address"
+            Visibility="{x:Bind ShowListOfAddresses, Mode=OneTime}"
+            Style="{StaticResource ComboBoxHeaderStyle}"
+            HorizontalAlignment="Stretch"
+            SelectionChanged="cmbAddressList_SelectionChanged"
+            >
+            <ComboBox.ItemTemplate>
+                <DataTemplate x:DataType="local:Address">
+                    <TextBlock Text="{x:Bind ToString()}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ContentControl 
+            Grid.Row="2" 
+            HorizontalContentAlignment="Stretch"
+            VerticalAlignment="Stretch">
+            <Grid Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.ColumnSpan="2" Grid.RowSpan="4"/>
+                <TextBox 
+                Grid.ColumnSpan="3" 
+                Header="Line1" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderRequiredStyle}"
+                Text="{x:Bind Address.Line1, Mode=TwoWay}"
+                />
+                <TextBox 
+                Grid.Row="1" 
+                Grid.ColumnSpan="3" 
+                Header="Line2" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderStyle}"
+                Text="{x:Bind Address.Line2, Mode=TwoWay}"
+                />
+                <TextBox 
+                Grid.Row="2" 
+                Grid.Column="0" 
+                Header="Zip" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderStyle}"
+                Text="{x:Bind Address.PostalCode, Mode=TwoWay}"
+                                                             />
+                <TextBox 
+                Grid.Column="1" 
+                Header="Town/City" 
+                Grid.Row="2" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderRequiredStyle}" 
+                Text="{x:Bind Address.City, Mode=TwoWay}"
+                />
+                <TextBox  
+                Grid.Column="0" 
+                Header="Country" 
+                Grid.Row="3" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderRequiredStyle}" 
+                Text="{x:Bind Address.Country, Mode=TwoWay}"
+                />
+                <TextBox  
+                Grid.Column="1" 
+                Header="State" 
+                Grid.Row="3" 
+                IsReadOnly="{x:Bind CanEditAddress, Mode=OneTime, Converter={StaticResource ReverseBooleanConverter}}"
+                Style="{StaticResource TextBoxHeaderRequiredStyle}" 
+                Text="{x:Bind Address.Province, Mode=TwoWay}"
+                />
+            </Grid>
+        </ContentControl>
+    </Grid>
+</UserControl>
