@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{0aff4205-8d7a-49f3-919b-d6de3521d7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderers">
+      <UniqueIdentifier>{8600d6b2-172f-4ac0-bf41-6f1e07be256e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{9c76933b-3983-4b79-ae7e-439445992516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Selectors">
+      <UniqueIdentifier>{fea97264-d4b1-452a-8735-71c3cc4c3470}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Bars.xaml.cpp" />
+    <ClCompile Include="PhotoEditor.xaml.cpp" />
+    <ClCompile Include="SimpleRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionFlowItem.cpp">
+      <Filter>Models</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionFlowNodeSelector.cpp">
+      <Filter>Selectors</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionFlowControl.xaml.cpp" />
+    <ClCompile Include="TriangleRenderer.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLES.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererBase.cpp">
+      <Filter>Renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.xaml.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Bars.xaml.h" />
+    <ClInclude Include="PhotoEditor.xaml.h" />
+    <ClInclude Include="MathHelper.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="TransactionFlowItem.h">
+      <Filter>Models</Filter>
+    </ClInclude>
+    <ClInclude Include="TransactionFlowNodeSelector.h">
+      <Filter>Selectors</Filter>
+    </ClInclude>
+    <ClInclude Include="TransactionFlowControl.xaml.h" />
+    <ClInclude Include="TriangleRenderer.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLES.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="RendererBase.h">
+      <Filter>Renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.xaml.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Bars.xaml" />
+    <Page Include="PhotoEditor.xaml" />
+    <Page Include="TransactionFlowControl.xaml" />
+    <Page Include="Triangle.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

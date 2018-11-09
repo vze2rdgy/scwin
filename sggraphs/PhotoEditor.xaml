@@ -1,0 +1,100 @@
+﻿<UserControl
+    x:Class="sggraphs.PhotoEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:sggraphs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontSize" Value="10"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderThickness="0,0,0,1"
+                Grid.Row="0" 
+                Grid.ColumnSpan="2"
+                BorderBrush="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+            <Button ToolTipService.ToolTip="Take Picture">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE114;"  />
+            </Button>
+            <!-- visible only when multiple cameras are detected-->
+            <Button ToolTipService.ToolTip="Switch Camera">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE124;"  />
+            </Button>
+            <Button ToolTipService.ToolTip="Upload Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE11C;"  />
+            </Button>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button ToolTipService.ToolTip="Zoom Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE1A3;"  />
+            </Button>
+            <Button ToolTipService.ToolTip="Rotate Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE14A;"  />
+            </Button>
+            <Button ToolTipService.ToolTip="Flip Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE13C;"  />
+            </Button>
+            <Button ToolTipService.ToolTip="Crop Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE123;"  />
+            </Button>
+        </StackPanel>
+        <Border BorderThickness="1,0,0,0"
+                Grid.Row="0" 
+                Grid.Column="1" 
+                BorderBrush="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <Button Grid.Column="1" ToolTipService.ToolTip="Crop Image">
+            <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE10A;"  />
+        </Button>
+        <Border BorderThickness="1,0,0,0"
+                Grid.Row="1" 
+                Grid.Column="1"
+                Grid.RowSpan="3"
+                BorderBrush="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="3"/>
+        <Slider Grid.Column="1" Grid.Row="2" 
+                Orientation="Vertical" 
+                Value="0" Maximum="100" Minimum="0"/>
+        <Border BorderThickness="0,1,0,0"
+                Grid.Row="4" 
+                Grid.ColumnSpan="2"
+                BorderBrush="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button ToolTipService.ToolTip="Save Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE105;"/>
+            </Button>
+            <Button ToolTipService.ToolTip="Undo Image Modifications">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE10E;"/>
+            </Button>
+        </StackPanel>
+        <Border BorderThickness="1,0,0,0"
+                Grid.Row="4"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                BorderBrush="{StaticResource AppBarItemForegroundThemeBrush}"/>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Left">
+            <Button ToolTipService.ToolTip="Delete Image">
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE107;"  />
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
